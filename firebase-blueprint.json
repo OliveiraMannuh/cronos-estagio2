@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "InternshipEntry": {
+      "title": "Internship Entry",
+      "description": "A record of internship activities including date, times, and report.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the user who owns this entry."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "The date of the entry (YYYY-MM-DD)."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the activity (HH:MM)."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the activity (HH:MM)."
+        },
+        "durationMinutes": {
+          "type": "integer",
+          "description": "The duration in minutes."
+        },
+        "reportText": {
+          "type": "string",
+          "description": "The transcribed or typed report of the day's activities."
+        }
+      },
+      "required": ["userId", "date", "startTime", "endTime", "durationMinutes"]
+    }
+  },
+  "firestore": {
+    "entries/{entryId}": {
+      "schema": "InternshipEntry",
+      "description": "Collection of internship entries."
+    },
+    "settings/{userId}": {
+      "schema": "UserSettings",
+      "description": "User specific settings including Google Docs sync status."
+    }
+  },
+  "entities": {
+    "InternshipEntry": {
+      "title": "Internship Entry",
+      "description": "A record of internship activities including date, times, and report.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The UID of the user who owns this entry."
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "The date of the entry (YYYY-MM-DD)."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the activity (HH:MM)."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the activity (HH:MM)."
+        },
+        "durationMinutes": {
+          "type": "integer",
+          "description": "The duration in minutes."
+        },
+        "reportText": {
+          "type": "string",
+          "description": "The transcribed or typed report of the day's activities."
+        }
+      },
+      "required": ["userId", "date", "startTime", "endTime", "durationMinutes"]
+    },
+    "UserSettings": {
+      "title": "User Settings",
+      "description": "Storage for user preferences like Google Docs docId.",
+      "type": "object",
+      "properties": {
+        "googleDocId": {
+          "type": "string",
+          "description": "ID of the linked Google Doc."
+        },
+        "autoSyncEnabled": {
+          "type": "boolean",
+          "description": "Whether auto-sync is active."
+        }
+      },
+      "required": ["autoSyncEnabled"]
+    }
+  }
+}
