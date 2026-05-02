@@ -111,8 +111,25 @@ function handleFirestoreError(error: unknown, operationType: OperationType, path
   throw new Error(JSON.stringify(errInfo));
 }
 
-// Initialize Gemini
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Initialize Gemini safely
+let aiInstance: GoogleGenAI | null = null;
+const getAi = () => {
+  if (aiInstance) return aiInstance;
+  
+  const apiKey = process.env.GEMINI_API_KEY;
+  // Verifica se a chave existe e não é uma string vazia ou "undefined" vinda do build
+  if (!apiKey || apiKey === "undefined" || apiKey.length < 10) {
+    return null;
+  }
+  
+  try {
+    aiInstance = new GoogleGenAI({ apiKey });
+    return aiInstance;
+  } catch (e) {
+    console.error("Erro ao criar instância do Gemini:", e);
+    return null;
+  }
+};
 
 export default function App() {
   const [view, setView] = useState<'landing' | 'gallery'>('landing');
@@ -266,6 +283,10 @@ export default function App() {
     
     reader.onload = async () => {
       try {
+        const ai = getAi();
+        if (!ai) {
+          throw new Error("Serviço de IA não configurado. Adicione a chave GEMINI_API_KEY nos Secrets do seu repositório GitHub para usar esta função.");
+        }
         const base64Data = (reader.result as string).split(',')[1];
         
         const response = await ai.models.generateContent({
