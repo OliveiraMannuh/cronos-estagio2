@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Maximize2, ArrowLeft, LogIn } from 'lucide-react';
+import { X, Maximize2, ArrowLeft, LogIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface GalleryItem {
   id: number;
@@ -27,7 +27,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 3,
-    url: 'https://i.postimg.cc/vZLc3n6x/50768f86-bbc5-4827-974e-1b2f5f5899cc.jpg',
+    url: 'https://i.postimg.cc/5yrx2wkJ/Whats-App-Image-2026-05-02-at-13-00-29.jpg',
     phrase: "Arquivar o presente é garantir o futuro da memória institucional.",
     category: "Gestão",
     description: "Organização de acervos e relatórios acadêmicos para preservação da história escolar."
@@ -76,6 +76,32 @@ interface FullGalleryProps {
 
 export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => {
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+
+  const handleNext = () => {
+    if (!selectedImage) return;
+    const currentIndex = galleryItems.findIndex(item => item.id === selectedImage.id);
+    const nextIndex = (currentIndex + 1) % galleryItems.length;
+    setSelectedImage(galleryItems[nextIndex]);
+  };
+
+  const handlePrev = () => {
+    if (!selectedImage) return;
+    const currentIndex = galleryItems.findIndex(item => item.id === selectedImage.id);
+    const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    setSelectedImage(galleryItems[prevIndex]);
+  };
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') setSelectedImage(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
 
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-[#1A1A1A] font-sans pb-20">
@@ -184,6 +210,33 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
             >
               <X size={24} />
             </motion.button>
+
+            {/* Navigation Buttons */}
+            <div className="absolute inset-0 flex items-center justify-between px-4 md:px-12 pointer-events-none">
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                className="pointer-events-auto p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
+              >
+                <ChevronLeft size={32} />
+              </motion.button>
+              
+              <motion.button
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                className="pointer-events-auto p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
+              >
+                <ChevronRight size={32} />
+              </motion.button>
+            </div>
 
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-3 gap-12 items-center overflow-y-auto max-h-screen pt-20 pb-12 px-4 md:px-0">
               <motion.div
