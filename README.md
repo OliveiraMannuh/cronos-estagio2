@@ -97,7 +97,7 @@ Copie o arquivo de exemplo e preencha com suas credenciais:
 cp .env.example .env.local
 ```
 
-Edite `.env.local` com os seus dados:
+Edite `.env.local` with os seus dados:
 
 ```env
 VITE_GEMINI_API_KEY=sua_chave_gemini_aqui
