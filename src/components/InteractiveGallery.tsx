@@ -53,7 +53,7 @@ export const InteractiveGallery: React.FC = () => {
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 sm:p-8">
             <span className="text-white/60 text-[10px] uppercase tracking-[0.2em] mb-2 font-medium">
               {item.category}
             </span>
@@ -61,9 +61,10 @@ export const InteractiveGallery: React.FC = () => {
               "{item.phrase}"
             </p>
           </div>
-          {/* Static indicator for mobile */}
-          <div className="absolute top-4 right-4 md:hidden">
-            <div className="w-2 h-2 rounded-full bg-white/50" />
+          {/* Static info visible on mobile - always show gradient + text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent md:hidden flex flex-col justify-end p-4">
+            <span className="text-white/70 text-[9px] uppercase tracking-widest font-bold mb-1">{item.category}</span>
+            <p className="text-white text-xs font-serif italic leading-snug">"{item.phrase}"</p>
           </div>
         </motion.div>
       ))}

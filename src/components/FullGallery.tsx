@@ -106,7 +106,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-[#1A1A1A] font-sans pb-20">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 py-4 bg-[#FDFCFB]/80 backdrop-blur-md border-b border-[#1A1A1A]/5">
+      <nav className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4 bg-[#FDFCFB]/80 backdrop-blur-md border-b border-[#1A1A1A]/5">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-[#7A7A7A] hover:text-[#1A1A1A] transition-colors group"
@@ -116,14 +116,14 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
         </button>
         <button
           onClick={onLogin}
-          className="flex items-center gap-2 bg-[#1A1A1A] text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-black transition-all shadow-lg"
+          className="flex items-center gap-2 bg-[#1A1A1A] text-white px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-black transition-all shadow-lg"
         >
           <LogIn size={16} />
           Acessar Painel
         </button>
       </nav>
 
-      <main className="pt-32 px-6 max-w-7xl mx-auto">
+      <main className="pt-24 sm:pt-32 px-4 sm:px-6 max-w-7xl mx-auto">
         <header className="mb-16 text-center max-w-2xl mx-auto">
           <motion.span
             initial={{ opacity: 0 }}
@@ -135,7 +135,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-serif mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl font-serif mb-6"
           >
             Registros Visuais do <span className="italic">Estágio</span>
           </motion.h1>
@@ -150,7 +150,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
           </motion.p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {galleryItems.map((item, index) => (
             <motion.div
               key={item.id}
@@ -158,7 +158,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05 }}
               onClick={() => setSelectedImage(item)}
-              className="group relative aspect-[4/5] rounded-[32px] overflow-hidden cursor-pointer"
+              className="group relative aspect-[4/5] rounded-2xl sm:rounded-[32px] overflow-hidden cursor-pointer"
             >
               <img
                 src={item.url}
@@ -168,7 +168,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
               />
               
               {/* Overlay with phrase on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 p-8 flex flex-col justify-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 p-4 sm:p-8 flex flex-col justify-end">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-white/60 text-[10px] uppercase tracking-widest font-bold">
                     {item.category}
@@ -177,14 +177,14 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
                     <Maximize2 size={14} />
                   </div>
                 </div>
-                <p className="text-white text-xl font-serif italic leading-snug">
+                <p className="text-white text-sm sm:text-xl font-serif italic leading-snug">
                   "{item.phrase}"
                 </p>
               </div>
 
               {/* Static Mobile info */}
-              <div className="absolute bottom-6 left-6 md:hidden">
-                <p className="text-white text-sm font-serif italic drop-shadow-md">
+              <div className="absolute bottom-3 left-3 sm:bottom-6 sm:left-6 md:hidden">
+                <p className="text-white text-xs sm:text-sm font-serif italic drop-shadow-md">
                   "{item.phrase}"
                 </p>
               </div>
@@ -206,7 +206,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
               initial={{ opacity: 0, rotate: -90 }}
               animate={{ opacity: 1, rotate: 0 }}
               onClick={() => setSelectedImage(null)}
-              className="absolute top-8 right-8 z-[110] p-4 bg-[#1A1A1A] text-white rounded-full hover:scale-110 active:scale-95 transition-all"
+              className="absolute top-4 right-4 sm:top-8 sm:right-8 z-[110] p-3 sm:p-4 bg-[#1A1A1A] text-white rounded-full hover:scale-110 active:scale-95 transition-all"
             >
               <X size={24} />
             </motion.button>
@@ -220,9 +220,10 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
                   e.stopPropagation();
                   handlePrev();
                 }}
-                className="pointer-events-auto p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
+                className="pointer-events-auto p-2 sm:p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
               >
-                <ChevronLeft size={32} />
+                <ChevronLeft size={20} className="sm:hidden" />
+                <ChevronLeft size={32} className="hidden sm:block" />
               </motion.button>
               
               <motion.button
@@ -232,13 +233,14 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
                   e.stopPropagation();
                   handleNext();
                 }}
-                className="pointer-events-auto p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
+                className="pointer-events-auto p-2 sm:p-4 bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:scale-110 active:scale-95 transition-all shadow-xl shadow-black/5"
               >
-                <ChevronRight size={32} />
+                <ChevronRight size={20} className="sm:hidden" />
+                <ChevronRight size={32} className="hidden sm:block" />
               </motion.button>
             </div>
 
-            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-3 gap-12 items-center overflow-y-auto max-h-screen pt-20 pb-12 px-4 md:px-0">
+            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12 items-center overflow-y-auto max-h-screen pt-16 sm:pt-20 pb-8 sm:pb-12 px-4 md:px-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -262,7 +264,7 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
                   <span className="text-[11px] uppercase tracking-[0.4em] text-[#B19470] font-bold mb-4 block">
                     {selectedImage.category}
                   </span>
-                  <h2 className="text-4xl font-serif italic leading-tight mb-6">
+                  <h2 className="text-2xl sm:text-4xl font-serif italic leading-tight mb-4 sm:mb-6">
                     "{selectedImage.phrase}"
                   </h2>
                   <p className="text-[#7A7A7A] leading-relaxed text-lg font-light">

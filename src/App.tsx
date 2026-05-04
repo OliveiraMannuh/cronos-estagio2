@@ -519,7 +519,7 @@ export default function App() {
           />
 
           {/* Header */}
-          <header className="max-w-2xl mx-auto pt-12 px-6 pb-8">
+          <header className="max-w-2xl mx-auto pt-8 sm:pt-12 px-4 sm:px-6 pb-6 sm:pb-8">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
             <img src="logo.png" alt="Cronos Estágio" className="w-12 h-12 object-contain" />
@@ -538,9 +538,9 @@ export default function App() {
         <p className="text-sm text-[#7A7A7A] font-medium uppercase tracking-widest">Estudante de Letras</p>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 pb-24">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 pb-24">
         {/* Progress Card */}
-        <section className="bg-white border border-[#E8E8E8] rounded-3xl p-8 shadow-sm mb-8">
+        <section className="bg-white border border-[#E8E8E8] rounded-3xl p-5 sm:p-8 shadow-sm mb-6 sm:mb-8">
           <div className="flex justify-between items-end mb-6">
             <div>
               <p className="text-sm text-[#7A7A7A] mb-1">Progresso Total</p>
@@ -715,7 +715,7 @@ export default function App() {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
-              className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full max-w-xl bg-white rounded-t-[2.5rem] md:rounded-[2.5rem] p-8 shadow-2xl z-50 border border-[#E8E8E8] max-h-[90vh] overflow-y-auto"
+              className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full max-w-xl bg-white rounded-t-[2.5rem] md:rounded-[2.5rem] p-6 sm:p-8 shadow-2xl z-50 border border-[#E8E8E8] max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-serif font-bold">Novo Registro</h2>
@@ -828,7 +828,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl bg-white rounded-[2.5rem] p-8 shadow-2xl z-50 border border-[#E8E8E8] max-h-[80vh] overflow-y-auto"
+              className="fixed bottom-0 left-0 right-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full max-w-xl bg-white rounded-t-[2.5rem] md:rounded-[2.5rem] p-6 sm:p-8 shadow-2xl z-50 border border-[#E8E8E8] max-h-[90vh] overflow-y-auto"
             >
               <div className="flex justify-between items-start mb-8">
                 <div className="flex-1">
@@ -941,7 +941,7 @@ export default function App() {
       </AnimatePresence>
 
       {/* Footer Info */}
-      <footer className="max-w-2xl mx-auto px-6 py-12 text-center">
+      <footer className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-12 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#F2E8DF]/50 rounded-full text-[11px] font-bold uppercase tracking-widest text-[#8B5E3C]">
           {stats.remainingMinutes === 0 ? (
             <>
