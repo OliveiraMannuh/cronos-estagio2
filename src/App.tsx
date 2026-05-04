@@ -522,7 +522,7 @@ export default function App() {
           <header className="max-w-2xl mx-auto pt-12 px-6 pb-8">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <img src="navbar.png" alt="Cronos Estágio" className="w-10 h-10 object-contain" />
+            <img src="logo.png" alt="Cronos Estágio" className="w-12 h-12 object-contain" />
             <h1 className="text-2xl font-serif font-semibold tracking-tight">Cronos Estágio</h1>
           </div>
           <div className="flex items-center gap-2">
