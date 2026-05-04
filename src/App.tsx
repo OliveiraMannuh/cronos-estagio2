@@ -9,7 +9,6 @@ import {
   Trash2, 
   Clock, 
   Calendar as CalendarIcon, 
-  BookOpen,
   CheckCircle2,
   AlertCircle,
   FileText,
@@ -523,9 +522,7 @@ export default function App() {
           <header className="max-w-2xl mx-auto pt-12 px-6 pb-8">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#F2E8DF] rounded-xl">
-              <BookOpen size={24} className="text-[#8B5E3C]" />
-            </div>
+            <img src="favicon.png" alt="Cronos Estágio" className="w-10 h-10 object-contain" />
             <h1 className="text-2xl font-serif font-semibold tracking-tight">Cronos Estágio</h1>
           </div>
           <div className="flex items-center gap-2">

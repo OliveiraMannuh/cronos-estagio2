@@ -15,9 +15,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onViewGallery
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 bg-[#FDFCFB]/80 backdrop-blur-md border-bottom border-[#1A1A1A]/5">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-[#1A1A1A] rounded-lg flex items-center justify-center">
-            <span className="text-white font-serif font-bold text-lg">C</span>
-          </div>
+          <img src="favicon.png" alt="Cronos Estágio" className="w-8 h-8 object-contain" />
           <span className="font-serif font-semibold tracking-tight">Cronos Estágio</span>
         </div>
         <button
