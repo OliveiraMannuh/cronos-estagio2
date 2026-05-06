@@ -8,7 +8,7 @@ interface ContatoPageProps {
 
 const students = [
   {
-    name: 'Nome do Aluno 1',
+    name: 'José Domingues',
     role: 'Estagiário · Licenciatura em Letras',
     bio: 'Estudante do curso de Letras com interesse em análise linguística, literatura brasileira e metodologias ativas no ensino de língua portuguesa. Em processo de formação docente através do estágio supervisionado na rede pública de ensino.',
     linkedin: 'https://linkedin.com',
@@ -16,11 +16,11 @@ const students = [
     initials: 'A1',
   },
   {
-    name: 'Nome do Aluno 2',
+    name: 'Manuela Oliveira',
     role: 'Estagiária · Licenciatura em Letras',
-    bio: 'Estudante de Letras com foco em práticas pedagógicas reflexivas, produção textual e leitura crítica. Desenvolve pesquisa sobre o ensino de literatura no Ensino Médio e participa ativamente do estágio supervisionado.',
-    linkedin: 'https://linkedin.com',
-    lattes: 'https://lattes.cnpq.br',
+    bio: 'Estudante de Licenciatura em Letras com trajetória multidisciplinar que une educação, tecnologia e design. Com experiência em administração de plataformas educacionais como o Moodle e no desenvolvimento de soluções digitais, traz um olhar diferenciado para as práticas pedagógicas no ensino de Língua Portuguesa e Literatura. Pesquisa o uso de recursos digitais como suporte ao letramento e à leitura crítica no Ensino Médio.',
+    linkedin: 'https://www.linkedin.com/in/manuela-oliveira-da-silva',
+    lattes: 'http://lattes.cnpq.br/3335259466013664',
     initials: 'A2',
   },
 ];

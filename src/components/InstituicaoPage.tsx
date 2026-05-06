@@ -63,7 +63,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
               <h2 className="text-2xl font-serif mb-4 leading-tight">Escola Campo de Estágio</h2>
               <div className="space-y-4 text-[#4A4A4A] leading-relaxed font-light">
                 <p>
-                  O estágio supervisionado foi realizado em uma instituição de ensino da rede pública, em turmas do Ensino Médio, com foco na disciplina de Língua Portuguesa e Literatura.
+                  O estágio supervisionado foi realizado em uma instituição de ensino da rede pública, em turmas do Ensino Fundamental II e Médio, com foco na disciplina de Língua Portuguesa e Literatura.
                 </p>
                 <p>
                   O ambiente escolar possibilitou o contato direto com a diversidade do corpo estudantil, os desafios da gestão de sala e a aplicação de metodologias ativas no ensino da língua.
@@ -77,7 +77,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#4A4A4A]">
                   <Users size={15} className="text-[#B19470] flex-shrink-0" />
-                  <span>Turmas do Ensino Médio</span>
+                  <span>Turmas do Ensino Fundamental II e Médio</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#4A4A4A]">
                   <GraduationCap size={15} className="text-[#B19470] flex-shrink-0" />
@@ -95,7 +95,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
                 </div>
                 <div className="flex justify-between items-center border-b border-[#1A1A1A]/5 pb-4">
                   <span className="text-sm text-[#7A7A7A]">Nível de Ensino</span>
-                  <span className="text-sm font-medium">Ensino Médio</span>
+                  <span className="text-sm font-medium">Ensino Fundamental II e Médio</span>
                 </div>
                 <div className="flex justify-between items-center border-b border-[#1A1A1A]/5 pb-4">
                   <span className="text-sm text-[#7A7A7A]">Modalidade</span>
@@ -103,7 +103,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-[#7A7A7A]">Período</span>
-                  <span className="text-sm font-medium">2025 — 2026</span>
+                  <span className="text-sm font-medium">Março de 2026 - Junho de 2026</span>
                 </div>
               </div>
             </div>
