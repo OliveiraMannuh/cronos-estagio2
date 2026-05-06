@@ -30,6 +30,9 @@ import { auth, db } from './firebase';
 import { exportToDocx } from './utils/exportUtils';
 import { LandingPage } from './components/LandingPage';
 import { FullGallery } from './components/FullGallery';
+import { SobrePage } from './components/SobrePage';
+import { InstituicaoPage } from './components/InstituicaoPage';
+import { ContatoPage } from './components/ContatoPage';
 import { 
   signInWithPopup, 
   GoogleAuthProvider, 
@@ -131,7 +134,7 @@ const getAi = () => {
 };
 
 export default function App() {
-  const [view, setView] = useState<'landing' | 'gallery'>('landing');
+  const [view, setView] = useState<'landing' | 'gallery' | 'sobre' | 'instituicao' | 'contato'>('landing');
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(sessionStorage.getItem('google_access_token'));
   const [isAuthReady, setIsAuthReady] = useState(false);
@@ -484,13 +487,16 @@ export default function App() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4 }}
           >
-            <LandingPage 
-              onLogin={handleLogin} 
+            <LandingPage
+              onLogin={handleLogin}
               onViewGallery={() => setView('gallery')}
-              isLoggingIn={isLoggingIn} 
+              onViewSobre={() => setView('sobre')}
+              onViewInstituicao={() => setView('instituicao')}
+              onViewContato={() => setView('contato')}
+              isLoggingIn={isLoggingIn}
             />
           </motion.div>
-        ) : (
+        ) : view === 'gallery' ? (
           <motion.div
             key="gallery"
             initial={{ opacity: 0, x: 20 }}
@@ -499,6 +505,36 @@ export default function App() {
             transition={{ duration: 0.4 }}
           >
             <FullGallery onBack={() => setView('landing')} onLogin={handleLogin} />
+          </motion.div>
+        ) : view === 'sobre' ? (
+          <motion.div
+            key="sobre"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <SobrePage onBack={() => setView('landing')} />
+          </motion.div>
+        ) : view === 'instituicao' ? (
+          <motion.div
+            key="instituicao"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <InstituicaoPage onBack={() => setView('landing')} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="contato"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <ContatoPage onBack={() => setView('landing')} />
           </motion.div>
         )
       ) : (

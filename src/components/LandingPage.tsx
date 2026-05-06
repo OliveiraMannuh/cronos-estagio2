@@ -6,10 +6,13 @@ import { InteractiveGallery } from './InteractiveGallery';
 interface LandingPageProps {
   onLogin: () => void;
   onViewGallery: () => void;
+  onViewSobre: () => void;
+  onViewInstituicao: () => void;
+  onViewContato: () => void;
   isLoggingIn: boolean;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onViewGallery, isLoggingIn }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onViewGallery, onViewSobre, onViewInstituicao, onViewContato, isLoggingIn }) => {
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-[#1A1A1A] font-sans selection:bg-[#B19470]/20">
       {/* Navigation */}
@@ -155,9 +158,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLogin, onViewGallery
             © 2026 Cronos Estágio. Desenvolvido por Estudantes de Letras.
           </div>
           <div className="flex gap-8 text-[#7A7A7A] text-[10px] items-center uppercase tracking-widest font-bold">
-            <span className="hover:text-[#1A1A1A] cursor-pointer">Privacidade</span>
-            <span className="hover:text-[#1A1A1A] cursor-pointer">Termos</span>
-            <span className="hover:text-[#1A1A1A] cursor-pointer">Suporte</span>
+            <button onClick={onViewSobre} className="hover:text-[#1A1A1A] transition-colors">Sobre o Projeto</button>
+            <button onClick={onViewInstituicao} className="hover:text-[#1A1A1A] transition-colors">Instituição</button>
+            <button onClick={onViewContato} className="hover:text-[#1A1A1A] transition-colors">Contato</button>
           </div>
         </footer>
       </main>
