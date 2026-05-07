@@ -5,10 +5,57 @@
 const DOCS_API_BASE = 'https://docs.googleapis.com/v1/documents';
 const DRIVE_API_BASE = 'https://www.googleapis.com/drive/v3/files';
 
+const buildGoogleApiError = async (response: Response, operation: string): Promise<Error> => {
+  let payload: any = null;
+
+  try {
+    payload = await response.json();
+  } catch {
+    payload = null;
+  }
+
+  const status = response.status;
+  const apiMessage = payload?.error?.message || 'Google API request failed.';
+  const apiStatus = payload?.error?.status || 'UNKNOWN';
+  const apiReason = payload?.error?.errors?.[0]?.reason || 'unknown_reason';
+  const message = `[GoogleAPI:${operation}] status=${status} apiStatus=${apiStatus} reason=${apiReason} message=${apiMessage}`;
+
+  return new Error(message);
+};
+
 export interface GoogleDocInfo {
   id: string;
   title: string;
 }
+
+export const buildSyncHashMarker = (syncHash: string): string => `CRONOS_SYNC_HASH:${syncHash}`;
+
+export const hasSyncHash = (docText: string, syncHash: string): boolean => {
+  return docText.includes(buildSyncHashMarker(syncHash));
+};
+
+export const getDocText = async (accessToken: string, docId: string): Promise<string> => {
+  const response = await fetch(`${DOCS_API_BASE}/${docId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!response.ok) {
+    throw await buildGoogleApiError(response, 'getDocText');
+  }
+
+  const data = await response.json();
+  const content = data?.body?.content || [];
+
+  let fullText = '';
+  for (const block of content) {
+    const elements = block?.paragraph?.elements || [];
+    for (const element of elements) {
+      fullText += element?.textRun?.content || '';
+    }
+  }
+
+  return fullText;
+};
 
 /**
  * Finds a document by title in the user's Google Drive.
@@ -20,9 +67,7 @@ export const findDocByTitle = async (accessToken: string, title: string): Promis
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    console.error('Error finding doc:', error);
-    return null;
+    throw await buildGoogleApiError(response, 'findDocByTitle');
   }
 
   const data = await response.json();
@@ -43,9 +88,7 @@ export const createDoc = async (accessToken: string, title: string): Promise<str
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    console.error('Error creating doc:', error);
-    return null;
+    throw await buildGoogleApiError(response, 'createDoc');
   }
 
   const data = await response.json();
@@ -79,9 +122,7 @@ export const appendToDoc = async (accessToken: string, docId: string, content: {
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    console.error('Error appending to doc:', error);
-    throw new Error('Falha ao atualizar o Google Docs.');
+    throw await buildGoogleApiError(response, 'appendToDoc');
   }
 
   return await response.json();
@@ -90,7 +131,12 @@ export const appendToDoc = async (accessToken: string, docId: string, content: {
 /**
  * Completely replaces doc content with all entries (Syncing full state)
  */
-export const syncAllEntriesToDoc = async (accessToken: string, docId: string, entries: any[]) => {
+export const syncAllEntriesToDoc = async (
+  accessToken: string,
+  docId: string,
+  entries: any[],
+  options?: { syncHash?: string }
+) => {
   // Sort entries chronologically (oldest first)
   const sortedEntries = [...entries].sort((a, b) => a.date.localeCompare(b.date));
   
@@ -102,24 +148,43 @@ export const syncAllEntriesToDoc = async (accessToken: string, docId: string, en
     fullText += `${entry.reportText || 'Sem relatório escrito.'}\n\n`;
   });
 
-  // First, get doc length to delete existing content if needed
-  // For simplicity in this demo, we'll just append a new version or use a simpler update
-  // Ideal: Clear doc then append.
-  // Clearing doc is tricky via API (delete range).
-  
-  // Alternative: Just append a "CONSOLIDATED UPDATE" header
-  const updateHeader = `\n\n=== SINCRONIZAÇÃO COMPLETA EM ${new Date().toLocaleString('pt-BR')} ===\n\n`;
-  
-  const requestBody = {
-    requests: [
-      {
-        insertText: {
-          endOfSegmentLocation: { segmentId: '' },
-          text: updateHeader + fullText,
+  const updateHeader = `=== SINCRONIZAÇÃO COMPLETA EM ${new Date().toLocaleString('pt-BR')} ===\n\n`;
+  const syncMarker = options?.syncHash ? `${buildSyncHashMarker(options.syncHash)}\n\n` : '';
+  const nextContent = updateHeader + syncMarker + fullText;
+
+  const docResponse = await fetch(`${DOCS_API_BASE}/${docId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!docResponse.ok) {
+    throw await buildGoogleApiError(docResponse, 'syncAllEntriesToDoc.getDocument');
+  }
+
+  const docData = await docResponse.json();
+  const bodyContent = docData?.body?.content || [];
+  const endIndex = bodyContent.length > 0 ? bodyContent[bodyContent.length - 1].endIndex : 2;
+
+  const requests: any[] = [];
+  // Keep the final newline Google Docs requires, replacing the rest of the document.
+  if (endIndex > 2) {
+    requests.push({
+      deleteContentRange: {
+        range: {
+          startIndex: 1,
+          endIndex: endIndex - 1,
         },
       },
-    ],
-  };
+    });
+  }
+
+  requests.push({
+    insertText: {
+      location: { index: 1 },
+      text: nextContent,
+    },
+  });
+
+  const requestBody = { requests };
 
   const response = await fetch(`${DOCS_API_BASE}/${docId}:batchUpdate`, {
     method: 'POST',
@@ -131,6 +196,8 @@ export const syncAllEntriesToDoc = async (accessToken: string, docId: string, en
   });
 
   if (!response.ok) {
-    throw new Error('Falha na sincronização completa.');
+    throw await buildGoogleApiError(response, 'syncAllEntriesToDoc');
   }
+
+  return await response.json();
 };

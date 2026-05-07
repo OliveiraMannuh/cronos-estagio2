@@ -90,6 +90,32 @@ interface UserSettings {
   autoSyncEnabled: boolean;
 }
 
+const buildEntriesSyncHash = (entries: InternshipEntry[]): string => {
+  const normalized = [...entries]
+    .sort((a, b) => {
+      const left = `${a.date}|${a.startTime}|${a.endTime}|${a.durationMinutes}|${a.reportText || ''}`;
+      const right = `${b.date}|${b.startTime}|${b.endTime}|${b.durationMinutes}|${b.reportText || ''}`;
+      return left.localeCompare(right);
+    })
+    .map((entry) => ({
+      date: entry.date,
+      startTime: entry.startTime,
+      endTime: entry.endTime,
+      durationMinutes: entry.durationMinutes,
+      reportText: entry.reportText || '',
+    }));
+
+  const source = JSON.stringify(normalized);
+  let hash = 5381;
+
+  for (let i = 0; i < source.length; i += 1) {
+    hash = ((hash << 5) + hash) + source.charCodeAt(i);
+    hash |= 0;
+  }
+
+  return (hash >>> 0).toString(16);
+};
+
 function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
   const errInfo: FirestoreErrorInfo = {
     error: error instanceof Error ? error.message : String(error),
@@ -249,11 +275,6 @@ export default function App() {
 
       await addDoc(collection(db, 'entries'), newEntry);
       
-      // Auto-sync to Google Docs
-      if (settings.autoSyncEnabled) {
-        syncToGoogleDocs(newEntry);
-      }
-
       resetForm();
     } catch (error) {
       handleFirestoreError(error, OperationType.CREATE, 'entries');
@@ -344,11 +365,6 @@ export default function App() {
 
       await updateDoc(doc(db, 'entries', viewingEntry.id), updatedData);
       
-      // Sync to Google Docs if enabled
-      if (settings.autoSyncEnabled) {
-        syncToGoogleDocs(updatedData);
-      }
-
       setViewingEntry({ ...viewingEntry, ...updatedData });
       setIsEditingReport(false);
     } catch (error) {
@@ -362,8 +378,8 @@ export default function App() {
     return `${h}h ${m > 0 ? `${m}m` : ''}`;
   };
 
-  const handleLogin = async () => {
-    if (isLoggingIn) return;
+  const handleLogin = async (): Promise<string | null> => {
+    if (isLoggingIn) return null;
     setIsLoggingIn(true);
     try {
       const provider = new GoogleAuthProvider();
@@ -377,7 +393,10 @@ export default function App() {
       if (token) {
         setAccessToken(token);
         sessionStorage.setItem('google_access_token', token);
+        return token;
       }
+
+      return null;
     } catch (error: any) {
       // Ignore cancelled popup errors to improve UX and avoid the console error reported by the user
       if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
@@ -386,40 +405,58 @@ export default function App() {
         console.error("Erro ao fazer login:", error);
         alert(`Erro ao fazer login: ${error.message || "Verifique se o seu domínio está autorizado no console do Firebase."}`);
       }
+      return null;
     } finally {
       setIsLoggingIn(false);
     }
   };
 
-  const syncToGoogleDocs = async (entry: { date: string, startTime: string, endTime: string, reportText: string | null }) => {
+  const getOrCreateGoogleDocId = async (token: string): Promise<string> => {
+    let docId = settings.googleDocId;
+
+    if (!docId) {
+      docId = await GoogleDocsService.findDocByTitle(token, 'Cronos Estágio - Relatórios');
+    }
+    if (!docId) {
+      docId = await GoogleDocsService.createDoc(token, 'Cronos Estágio - Relatórios');
+    }
+
+    if (!docId) {
+      throw new Error('Não foi possível criar ou localizar o Google Docs.');
+    }
+
+    if (docId !== settings.googleDocId && user) {
+      const newSettings = { ...settings, autoSyncEnabled: true, googleDocId: docId };
+      setSettings(newSettings);
+      try {
+        await setDoc(doc(db, 'settings', user.uid), newSettings);
+      } catch (error) {
+        console.warn('Não foi possível salvar settings no Firestore. Mantendo estado local.', error);
+      }
+    }
+
+    return docId;
+  };
+
+  const syncEntriesIfNeeded = async (token: string, entriesToSync: InternshipEntry[]) => {
+    const docId = await getOrCreateGoogleDocId(token);
+    const syncHash = buildEntriesSyncHash(entriesToSync);
+    const docText = await GoogleDocsService.getDocText(token, docId);
+    const needsSync = !GoogleDocsService.hasSyncHash(docText, syncHash);
+
+    if (needsSync) {
+      await GoogleDocsService.syncAllEntriesToDoc(token, docId, entriesToSync, { syncHash });
+    }
+
+    return { docId, needsSync };
+  };
+
+  const syncToGoogleDocs = async (entriesToSync: InternshipEntry[]) => {
     if (!settings.autoSyncEnabled || !accessToken) return;
 
     try {
       setIsSyncing(true);
-      let docId = settings.googleDocId;
-
-      if (!docId) {
-        // Find existing or create new doc
-        docId = await GoogleDocsService.findDocByTitle(accessToken, 'Cronos Estágio - Relatórios');
-        if (!docId) {
-          docId = await GoogleDocsService.createDoc(accessToken, 'Cronos Estágio - Relatórios');
-        }
-        
-        if (docId && user) {
-          const newSettings = { ...settings, googleDocId: docId };
-          await setDoc(doc(db, 'settings', user.uid), newSettings);
-          setSettings(newSettings);
-        }
-      }
-
-      if (docId) {
-        await GoogleDocsService.appendToDoc(accessToken, docId, {
-          date: entry.date,
-          startTime: entry.startTime,
-          endTime: entry.endTime,
-          report: entry.reportText || ''
-        });
-      }
+      await syncEntriesIfNeeded(accessToken, entriesToSync);
     } catch (error) {
       console.error("Erro ao sincronizar com Google Docs:", error);
       // We don't block the user if sync fails, but we could notify them.
@@ -429,23 +466,64 @@ export default function App() {
   };
 
   const handleToggleSync = async () => {
-    if (!user) return;
-    
-    // If enabling and no token, prompt login again or just warn
-    if (!settings.autoSyncEnabled && !accessToken) {
-      alert("Para ativar a sincronização, você precisará fazer login novamente para conceder permissões ao Google Docs.");
-      handleLogin();
+    if (!user) {
+      alert("Faça login para sincronizar com Google Docs.");
       return;
     }
 
-    const newSettings = { ...settings, autoSyncEnabled: !settings.autoSyncEnabled };
+    // Open the tab from user gesture to minimize popup blocking.
+    const docsTab = window.open('about:blank', '_blank');
+
+    setIsSyncing(true);
+
     try {
-      await setDoc(doc(db, 'settings', user.uid), newSettings);
+      let token = accessToken;
+
+      if (!token) {
+        token = await handleLogin();
+      }
+
+      if (!token) {
+        if (docsTab && !docsTab.closed) docsTab.close();
+        alert("Não foi possível autorizar o acesso ao Google Docs.");
+        return;
+      }
+
+      const { docId, needsSync } = await syncEntriesIfNeeded(token, entries);
+
+      const newSettings = { ...settings, autoSyncEnabled: true, googleDocId: docId };
       setSettings(newSettings);
+      try {
+        await setDoc(doc(db, 'settings', user.uid), newSettings);
+      } catch (error) {
+        console.warn('Não foi possível salvar settings no Firestore. Mantendo estado local.', error);
+      }
+
+      const googleDocUrl = `https://docs.google.com/document/d/${docId}/edit`;
+      if (docsTab && !docsTab.closed) {
+        docsTab.location.href = googleDocUrl;
+      } else {
+        window.open(googleDocUrl, '_blank', 'noopener,noreferrer');
+      }
+
+      alert(
+        needsSync
+          ? 'Relatório atualizado e aberto no Google Docs.'
+          : 'Nenhuma atualização pendente. Documento aberto no Google Docs.'
+      );
     } catch (error) {
-      handleFirestoreError(error, OperationType.WRITE, 'settings');
+      console.error('Erro ao sincronizar com Google Docs:', error);
+      if (docsTab && !docsTab.closed) docsTab.close();
+      alert('Falha ao sincronizar e abrir o Google Docs. Verifique permissões e tente novamente.');
+    } finally {
+      setIsSyncing(false);
     }
   };
+
+  useEffect(() => {
+    if (!settings.autoSyncEnabled || !accessToken || !user || entries.length === 0) return;
+    syncToGoogleDocs(entries);
+  }, [entries, settings.autoSyncEnabled, accessToken, user]);
 
   const handleLogout = async () => {
     try {
@@ -619,12 +697,13 @@ export default function App() {
             </button>
             <button 
               onClick={handleToggleSync}
+              disabled={isSyncing}
               className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm ${
                 settings.autoSyncEnabled 
                   ? 'bg-blue-50 text-blue-600 border border-blue-200' 
                   : 'bg-white border border-[#E8E8E8] text-[#7A7A7A] hover:bg-[#FDFCFB] hover:border-[#8B5E3C]/30'
-              }`}
-              title={settings.autoSyncEnabled ? "Sincronização Ativa (Google Docs)" : "Ativar sincronização com Google Docs"}
+              } disabled:opacity-60 disabled:cursor-not-allowed`}
+              title="Sincronizar e abrir no Google Docs"
             >
               {isSyncing ? (
                 <Loader2 size={18} className="animate-spin" />
