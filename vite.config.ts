@@ -5,8 +5,25 @@ import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
+
+  const normalizeBasePlugin = {
+    name: 'normalize-base-trailing-slash',
+    configureServer(server: any) {
+      server.middlewares.use((req: any, res: any, next: any) => {
+        if (req.url === '/cronos_estagio') {
+          res.statusCode = 302;
+          res.setHeader('Location', '/cronos_estagio/');
+          res.end();
+          return;
+        }
+
+        next();
+      });
+    },
+  };
+
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), normalizeBasePlugin],
     base: '/cronos_estagio/',
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || ""),

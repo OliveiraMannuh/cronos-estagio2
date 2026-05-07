@@ -12,7 +12,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-6 py-3 sm:py-4 bg-[#FDFCFB]/80 backdrop-blur-md border-b border-[#1A1A1A]/5">
         <div className="flex items-center gap-2">
-          <img src="logo.png" alt="Cronos Estágio" className="w-16 h-16 object-contain" />
+          <img src="/cronos_estagio/logo.png" alt="Cronos Estágio" className="w-16 h-16 object-contain" />
           <span className="font-serif font-semibold tracking-tight text-xl">Cronos Estágio</span>
         </div>
         <button

@@ -24,6 +24,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { InternshipEntry, InternshipStats } from './types';
 import { GoogleGenAI } from "@google/genai";
 import { auth, db } from './firebase';
@@ -160,7 +161,6 @@ const getAi = () => {
 };
 
 export default function App() {
-  const [view, setView] = useState<'landing' | 'gallery' | 'sobre' | 'instituicao' | 'contato'>('landing');
   const [user, setUser] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(sessionStorage.getItem('google_access_token'));
   const [isAuthReady, setIsAuthReady] = useState(false);
@@ -189,6 +189,8 @@ export default function App() {
   const [tempEndTime, setTempEndTime] = useState('');
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -235,6 +237,26 @@ export default function App() {
 
     return () => unsubscribe();
   }, [user, isAuthReady]);
+
+  useEffect(() => {
+    if (!isAuthReady) return;
+
+    const publicPaths = ['/', '/galeria', '/sobre', '/instituicao', '/contato'];
+
+    if (user && location.pathname !== '/dashboard') {
+      navigate('/dashboard', { replace: true });
+      return;
+    }
+
+    if (!user && location.pathname === '/dashboard') {
+      navigate('/', { replace: true });
+      return;
+    }
+
+    if (!user && !publicPaths.includes(location.pathname)) {
+      navigate('/', { replace: true });
+    }
+  }, [user, isAuthReady, location.pathname, navigate]);
 
   const stats = useMemo((): InternshipStats => {
     const totalMinutes = entries.reduce((acc, entry) => acc + entry.durationMinutes, 0);
@@ -557,7 +579,47 @@ export default function App() {
   return (
     <AnimatePresence mode="wait">
       {!user ? (
-        view === 'landing' ? (
+        location.pathname === '/galeria' ? (
+          <motion.div
+            key="gallery"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <FullGallery onBack={() => navigate('/')} onLogin={handleLogin} />
+          </motion.div>
+        ) : location.pathname === '/sobre' ? (
+          <motion.div
+            key="sobre"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <SobrePage onBack={() => navigate('/')} />
+          </motion.div>
+        ) : location.pathname === '/instituicao' ? (
+          <motion.div
+            key="instituicao"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <InstituicaoPage onBack={() => navigate('/')} />
+          </motion.div>
+        ) : location.pathname === '/contato' ? (
+          <motion.div
+            key="contato"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.4 }}
+          >
+            <ContatoPage onBack={() => navigate('/')} />
+          </motion.div>
+        ) : (
           <motion.div
             key="landing"
             initial={{ opacity: 0 }}
@@ -567,52 +629,12 @@ export default function App() {
           >
             <LandingPage
               onLogin={handleLogin}
-              onViewGallery={() => setView('gallery')}
-              onViewSobre={() => setView('sobre')}
-              onViewInstituicao={() => setView('instituicao')}
-              onViewContato={() => setView('contato')}
+              onViewGallery={() => navigate('/galeria')}
+              onViewSobre={() => navigate('/sobre')}
+              onViewInstituicao={() => navigate('/instituicao')}
+              onViewContato={() => navigate('/contato')}
               isLoggingIn={isLoggingIn}
             />
-          </motion.div>
-        ) : view === 'gallery' ? (
-          <motion.div
-            key="gallery"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.4 }}
-          >
-            <FullGallery onBack={() => setView('landing')} onLogin={handleLogin} />
-          </motion.div>
-        ) : view === 'sobre' ? (
-          <motion.div
-            key="sobre"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.4 }}
-          >
-            <SobrePage onBack={() => setView('landing')} />
-          </motion.div>
-        ) : view === 'instituicao' ? (
-          <motion.div
-            key="instituicao"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.4 }}
-          >
-            <InstituicaoPage onBack={() => setView('landing')} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="contato"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.4 }}
-          >
-            <ContatoPage onBack={() => setView('landing')} />
           </motion.div>
         )
       ) : (
@@ -636,7 +658,7 @@ export default function App() {
           <header className="max-w-2xl mx-auto pt-8 sm:pt-12 px-4 sm:px-6 pb-6 sm:pb-8">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <img src="logo.png" alt="Cronos Estágio" className="w-12 h-12 object-contain" />
+            <img src="/cronos_estagio/logo.png" alt="Cronos Estágio" className="w-12 h-12 object-contain" />
             <h1 className="text-2xl font-serif font-semibold tracking-tight">Cronos Estágio</h1>
           </div>
           <div className="flex items-center gap-2">
