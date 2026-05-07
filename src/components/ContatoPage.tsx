@@ -10,7 +10,7 @@ const students = [
   {
     name: 'José Domingues',
     role: 'Estagiário · Licenciatura em Letras',
-    bio: 'Estudante do curso de Letras com interesse em análise linguística, literatura brasileira e metodologias ativas no ensino de língua portuguesa. Em processo de formação docente através do estágio supervisionado na rede pública de ensino.',
+    bio: 'Discente em Letras - Português / Licenciatura, com trajetória multidisciplinar que une educação, escrita e arte. Com experiência profissional em design gráfico, ilustrações e serviços editoriais, oferece, portanto, maior dinâmica às práticas pedagógicas no ensino de Língua Portuguesa e Literatura. Tendo como base os estudos de Linguística Textual e de Literatura infantojuvenil, participa, por meio de editais do PAIC, das publicações de contos ilustrados, tendo em vista as escolas públicas do Ensino Fundamental.',
     linkedin: 'https://linkedin.com',
     lattes: 'https://lattes.cnpq.br',
     initials: 'A1',
