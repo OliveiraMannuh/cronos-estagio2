@@ -34,21 +34,21 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 4,
-    url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=1200',
+    url: 'https://i.postimg.cc/ryRtsNsL/photo-5073831346114858097-y.jpg',
     phrase: "Entre livros e relatórios, a prática docente ganha forma e propósito.",
     category: "Ensino",
     description: "O ambiente de sala de aula como laboratório vivo de experiências linguísticas."
   },
   {
     id: 5,
-    url: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1200',
+    url: 'https://i.postimg.cc/d0SLthK0/photo-5168002421089831935-y.jpg',
     phrase: "A leitura do mundo precede a leitura da palavra.",
     category: "Alfabetização",
     description: "Inspirado em Paulo Freire, observando como o contexto social influencia o letramento."
   },
   {
     id: 6,
-    url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200',
+    url: 'https://i.postimg.cc/bNHrSCjQ/Chat-GPT-Image-7-05-2026-21-09-18.png',
     phrase: "O diálogo é o encontro dos homens que mediatizam o mundo.",
     category: "Colaboração",
     description: "Reuniões pedagógicas e trocas de experiências entre estagiários e professores regentes."
