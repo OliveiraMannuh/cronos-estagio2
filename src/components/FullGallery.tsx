@@ -74,8 +74,32 @@ interface FullGalleryProps {
   onLogin: () => void;
 }
 
+type ImageOrientation = 'landscape' | 'portrait' | 'square';
+
 export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => {
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [imageOrientations, setImageOrientations] = useState<Record<number, ImageOrientation>>({});
+
+  const detectImageOrientation = (id: number, event: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = event.currentTarget;
+    if (!naturalWidth || !naturalHeight) return;
+
+    const ratio = naturalWidth / naturalHeight;
+    const orientation: ImageOrientation = ratio > 1.05 ? 'landscape' : ratio < 0.95 ? 'portrait' : 'square';
+
+    setImageOrientations((prev) => {
+      if (prev[id] === orientation) return prev;
+      return { ...prev, [id]: orientation };
+    });
+  };
+
+  const getModalImageSizeClass = (itemId: number) => {
+    const orientation = imageOrientations[itemId];
+    if (orientation === 'landscape') return 'max-h-[62vh] sm:max-h-[68vh]';
+    if (orientation === 'square') return 'max-h-[66vh] sm:max-h-[72vh]';
+    if (orientation === 'portrait') return 'max-h-[74vh] sm:max-h-[82vh]';
+    return 'max-h-[68vh] sm:max-h-[74vh]';
+  };
 
   const handleNext = () => {
     if (!selectedImage) return;
@@ -150,20 +174,21 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
           </motion.p>
         </header>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 sm:gap-6">
           {galleryItems.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 18, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: index * 0.05 }}
               onClick={() => setSelectedImage(item)}
-              className="group relative aspect-[4/5] rounded-2xl sm:rounded-[32px] overflow-hidden cursor-pointer"
+              className="group relative mb-3 sm:mb-6 break-inside-avoid rounded-2xl sm:rounded-[32px] overflow-hidden cursor-pointer bg-[#EEE8E1]"
             >
               <img
                 src={item.url}
                 alt={item.category}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                onLoad={(event) => detectImageOrientation(item.id, event)}
+                className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
               
@@ -244,12 +269,13 @@ export const FullGallery: React.FC<FullGalleryProps> = ({ onBack, onLogin }) => 
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="lg:col-span-2 relative aspect-[4/3] md:aspect-[3/2] rounded-[24px] md:rounded-[40px] overflow-hidden shadow-2xl shadow-black/20"
+                className="lg:col-span-2 relative flex items-center justify-center"
               >
                 <img
                   src={selectedImage.url}
                   alt={selectedImage.category}
-                  className="w-full h-full object-cover"
+                  onLoad={(event) => detectImageOrientation(selectedImage.id, event)}
+                  className={`w-auto h-auto max-w-full object-contain rounded-[18px] sm:rounded-[28px] shadow-2xl shadow-black/15 ${getModalImageSizeClass(selectedImage.id)}`}
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
