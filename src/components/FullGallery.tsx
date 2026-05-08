@@ -44,14 +44,14 @@ export const galleryItems: GalleryItem[] = [
     url: 'https://i.postimg.cc/d0SLthK0/photo-5168002421089831935-y.jpg',
     phrase: "Merecemos ler as letras e as palavras de gentileza",
     category: "Projeto",
-    description: "Projeto 'Gentileza gera Gentileza' ocorreu na sala de multimeios que convidou os alunos para um momento de lembrar o que siginifica a palavra 'gentileza'. A professora apresentou aos alunos a história do Profeta Gentileza, José Datrino, bem como ele ficou conhecido. O projeto explicou aos alunos os sinônimos da palavra, como civilidade, afabilidade e cortesia e fez questionamento de quais outros termos podem se aproximar da palavra 'gentileza'. O estudo dirigido levou os alunos a refletirem sobre como podemos realizar atos de gentileza nos dias atuais. Ao final os alunos foram incentivados a realizar um recorte nas resvistas de imagens que simbolizem gentileza e a escrever uma frase sobre, para posterior exposição."
+    description: "Projeto \"Gentileza gera Gentileza\" ocorreu na sala de multimeios que convidou os alunos para um momento de lembrar o que siginifica a palavra \"gentileza\". A professora apresentou aos alunos a história do Profeta Gentileza, José Datrino, bem como ele ficou conhecido. O projeto explicou aos alunos os sinônimos da palavra, como civilidade, afabilidade e cortesia e fez questionamento de quais outros termos podem se aproximar da palavra \"gentileza\". O estudo dirigido levou os alunos a refletirem sobre como podemos realizar atos de gentileza nos dias atuais. Ao final os alunos foram incentivados a realizar um recorte nas resvistas de imagens que simbolizem gentileza e a escrever uma frase sobre, para posterior exposição."
   },
   {
     id: 6,
     url: 'https://i.postimg.cc/bNHrSCjQ/Chat-GPT-Image-7-05-2026-21-09-18.png',
     phrase: "Romper o silêncio é o primeiro passo para salvar vidas.",
-    category: "Colaboração",
-    description: "O projeto 'Vozes interrompidas' mostra a importância de envolver toda a comunidade acadêmica em um projeto."
+    category: "Projeto",
+    description: "O projeto \"Vozes interrompidas\" mostra a importância de envolver toda a comunidade acadêmica em um projeto."
   },
   {
     id: 7,
