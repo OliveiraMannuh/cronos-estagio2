@@ -42,9 +42,9 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 5,
     url: 'https://i.postimg.cc/d0SLthK0/photo-5168002421089831935-y.jpg',
-    phrase: "A leitura do mundo precede a leitura da palavra.",
-    category: "Alfabetização",
-    description: "Inspirado em Paulo Freire, observando como o contexto social influencia o letramento."
+    phrase: "Merecemos ler as letras e as palavras de gentileza",
+    category: "Projeto",
+    description: "Projeto 'Gentileza gera Gentileza' ocorreu na sala de multimeios que convidou os alunos para um momento de lembrar o que siginifica a palavra 'gentileza'. A professora apresentou aos alunos a história do Profeta Gentileza, José Datrino, bem como ele ficou conhecido. O projeto explicou aos alunos os sinônimos da palavra, como civilidade, afabilidade e cortesia e fez questionamento de quais outros termos podem se aproximar da palavra 'gentileza'. O estudo dirigido levou os alunos a refletirem sobre como podemos realizar atos de gentileza nos dias atuais. Ao final os alunos foram incentivados a realizar um recorte nas resvistas de imagens que simbolizem gentileza e a escrever uma frase sobre, para posterior exposição."
   },
   {
     id: 6,
