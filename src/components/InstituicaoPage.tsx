@@ -63,7 +63,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
               <h2 className="text-2xl font-serif mb-4 leading-tight">Escola Campo de Estágio</h2>
               <div className="space-y-4 text-[#4A4A4A] leading-relaxed font-light">
                 <p>
-                  O estágio supervisionado foi realizado em uma instituição de ensino da rede pública, em turmas do Ensino Fundamental II e Médio, com foco na disciplina de Língua Portuguesa e Literatura.
+                  O estágio supervisionado foi realizado em uma instituição de ensino da rede pública, em turmas do Ensino Fundamental II e Médio, com foco na disciplina de Língua Portuguesa.
                 </p>
                 <p>
                   O ambiente escolar possibilitou o contato direto com a diversidade do corpo estudantil, os desafios da gestão de sala e a aplicação de metodologias ativas no ensino da língua.
@@ -81,7 +81,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#4A4A4A]">
                   <GraduationCap size={15} className="text-[#B19470] flex-shrink-0" />
-                  <span>Disciplina: Língua Portuguesa e Literatura</span>
+                  <span>Disciplina: Língua Portuguesa</span>
                 </div>
               </div>
             </div>
@@ -123,7 +123,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
           </div>
           <div className="space-y-4 text-white/70 leading-relaxed font-light max-w-2xl">
             <p>
-              O estágio supervisionado é componente curricular obrigatório do curso de Licenciatura em Letras, tendo por objetivo proporcionar ao licenciando a experiência da prática docente em contexto real de ensino.
+              O estágio é componente curricular obrigatório do curso de Licenciatura em Letras, tendo por objetivo proporcionar ao licenciando a experiência da prática docente em contexto real de ensino.
             </p>
             <p>
               A supervisão acadêmica garante a articulação entre a teoria estudada no curso e a prática vivenciada na escola campo, promovendo a formação crítica e reflexiva do futuro professor.

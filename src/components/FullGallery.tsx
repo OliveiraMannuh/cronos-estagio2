@@ -49,9 +49,9 @@ export const galleryItems: GalleryItem[] = [
   {
     id: 6,
     url: 'https://i.postimg.cc/bNHrSCjQ/Chat-GPT-Image-7-05-2026-21-09-18.png',
-    phrase: "O diálogo é o encontro dos homens que mediatizam o mundo.",
+    phrase: "Romper o silêncio é o primeiro passo para salvar vidas.",
     category: "Colaboração",
-    description: "Reuniões pedagógicas e trocas de experiências entre estagiários e professores regentes."
+    description: "O projeto 'Vozes interrompidas' mostra a importância de envolver toda a comunidade acadêmica em um projeto."
   },
   {
     id: 7,
