@@ -73,7 +73,7 @@ export const InstituicaoPage: React.FC<InstituicaoPageProps> = ({ onBack }) => {
               <div className="mt-8 space-y-3">
                 <div className="flex items-center gap-3 text-sm text-[#4A4A4A]">
                   <MapPin size={15} className="text-[#B19470] flex-shrink-0" />
-                  <span>Rede Pública Estadual</span>
+                  <span>CEJA Professor Gilmar Maia de Sousa</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-[#4A4A4A]">
                   <Users size={15} className="text-[#B19470] flex-shrink-0" />
