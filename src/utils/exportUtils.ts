@@ -2,6 +2,18 @@ import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } fro
 import { saveAs } from 'file-saver';
 import { InternshipEntry } from '../types';
 
+const formatEntryDate = (dateValue: string): string => {
+  // Preserve the exact calendar date stored in the record (YYYY-MM-DD).
+  const [year, month, day] = dateValue.split('-');
+
+  if (year && month && day) {
+    return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+  }
+
+  // Fallback for unexpected formats.
+  return dateValue;
+};
+
 export const exportToDocx = async (entries: InternshipEntry[]) => {
   // Sort entries chronologically (oldest first)
   const sortedEntries = [...entries].sort((a, b) => a.date.localeCompare(b.date));
@@ -9,7 +21,7 @@ export const exportToDocx = async (entries: InternshipEntry[]) => {
   const sections = sortedEntries.map((entry) => {
     return [
       new Paragraph({
-        text: `Data: ${new Date(entry.date).toLocaleDateString('pt-BR')}`,
+        text: `Data: ${formatEntryDate(entry.date)}`,
         heading: HeadingLevel.HEADING_2,
         spacing: { before: 400, after: 200 },
       }),

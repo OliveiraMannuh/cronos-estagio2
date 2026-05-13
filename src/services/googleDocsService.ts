@@ -5,6 +5,18 @@
 const DOCS_API_BASE = 'https://docs.googleapis.com/v1/documents';
 const DRIVE_API_BASE = 'https://www.googleapis.com/drive/v3/files';
 
+const formatEntryDate = (dateValue: string): string => {
+  // Preserve the exact calendar date stored in the record (YYYY-MM-DD).
+  const [year, month, day] = dateValue.split('-');
+
+  if (year && month && day) {
+    return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+  }
+
+  // Fallback for unexpected formats.
+  return dateValue;
+};
+
 const buildGoogleApiError = async (response: Response, operation: string): Promise<Error> => {
   let payload: any = null;
 
@@ -99,7 +111,7 @@ export const createDoc = async (accessToken: string, title: string): Promise<str
  * Appends a new entry to the Google Doc.
  */
 export const appendToDoc = async (accessToken: string, docId: string, content: { date: string, startTime: string, endTime: string, report: string }) => {
-  const textToAppend = `\n\n------------------------------------------------\nData: ${new Date(content.date).toLocaleDateString('pt-BR')}\nHorário: ${content.startTime} - ${content.endTime}\n\n${content.report || 'Sem relatório escrito.'}\n`;
+  const textToAppend = `\n\n------------------------------------------------\nData: ${formatEntryDate(content.date)}\nHorário: ${content.startTime} - ${content.endTime}\n\n${content.report || 'Sem relatório escrito.'}\n`;
 
   const requestBody = {
     requests: [
@@ -143,7 +155,7 @@ export const syncAllEntriesToDoc = async (
   let fullText = 'Cronos Estágio - Relatório Consolidado\n\n';
   sortedEntries.forEach(entry => {
     fullText += `------------------------------------------------\n`;
-    fullText += `Data: ${new Date(entry.date).toLocaleDateString('pt-BR')}\n`;
+    fullText += `Data: ${formatEntryDate(entry.date)}\n`;
     fullText += `Horário: ${entry.startTime} - ${entry.endTime}\n\n`;
     fullText += `${entry.reportText || 'Sem relatório escrito.'}\n\n`;
   });
