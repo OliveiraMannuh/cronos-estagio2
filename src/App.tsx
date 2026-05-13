@@ -145,9 +145,12 @@ let aiInstance: GoogleGenAI | null = null;
 const getAi = () => {
   if (aiInstance) return aiInstance;
   
-  const apiKey = process.env.GEMINI_API_KEY;
+  const env = (import.meta as any).env as Record<string, string | undefined>;
+  const rawApiKey = env.VITE_GEMINI_API_KEY || env.GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env?.GEMINI_API_KEY : undefined);
+  const apiKey = rawApiKey?.trim().replace(/^['\"]|['\"]$/g, "");
+  const looksLikePlaceholder = !!apiKey && /^(MY_|YOUR_|SUA_|EXAMPLE_|CHAVE_|KEY_)/i.test(apiKey);
   // Verifica se a chave existe e não é uma string vazia ou "undefined" vinda do build
-  if (!apiKey || apiKey === "undefined" || apiKey.length < 10) {
+  if (!apiKey || apiKey === "undefined" || apiKey.length < 10 || looksLikePlaceholder) {
     return null;
   }
   
@@ -199,9 +202,16 @@ export default function App() {
 
       if (currentUser) {
         // Load settings from Firestore
-        const settingsDoc = await getDoc(doc(db, 'settings', currentUser.uid));
-        if (settingsDoc.exists()) {
-          setSettings(settingsDoc.data() as UserSettings);
+        try {
+          const settingsDoc = await getDoc(doc(db, 'settings', currentUser.uid));
+          if (settingsDoc.exists()) {
+            setSettings(settingsDoc.data() as UserSettings);
+          }
+        } catch (error) {
+          const errorCode = (error as { code?: string })?.code;
+          if (errorCode !== 'permission-denied') {
+            console.error('Erro ao carregar configurações do usuário:', error);
+          }
         }
       }
     });
@@ -330,7 +340,7 @@ export default function App() {
       try {
         const ai = getAi();
         if (!ai) {
-          throw new Error("Serviço de IA não configurado. Adicione a chave GEMINI_API_KEY nos Secrets do seu repositório GitHub para usar esta função.");
+          throw new Error("Serviço de IA não configurado. Defina uma chave válida em VITE_GEMINI_API_KEY (ou GEMINI_API_KEY) no ambiente e reinicie o app.");
         }
         const base64Data = (reader.result as string).split(',')[1];
         
@@ -355,7 +365,14 @@ export default function App() {
         }
       } catch (error) {
         console.error("Erro na transcrição:", error);
-        alert("Não foi possível transcrever a imagem. Verifique sua conexão ou tente outra foto.");
+        const message = error instanceof Error ? error.message : String(error);
+        if (message.includes("API_KEY_INVALID") || message.includes("API key not valid")) {
+          alert("A chave Gemini está inválida. Configure uma chave real em VITE_GEMINI_API_KEY (ou GEMINI_API_KEY) e reinicie o servidor.");
+        } else if (message.includes("Serviço de IA não configurado")) {
+          alert("A transcrição está desativada: configure VITE_GEMINI_API_KEY em .env.local e reinicie o servidor.");
+        } else {
+          alert("Não foi possível transcrever a imagem. Verifique sua conexão ou tente outra foto.");
+        }
       } finally {
         setIsTranscribing(false);
         // Limpar o input para permitir subir a mesma foto se necessário
