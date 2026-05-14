@@ -11,12 +11,12 @@ interface GalleryItem {
 }
 
 export const galleryItems: GalleryItem[] = [
-  {
+    {
     id: 1,
-    url: 'https://i.postimg.cc/SsLTKDX2/9f2eded6-18ba-4e99-ba9a-c36f2a19a02d.jpg',
-    phrase: "A linguagem é a única pátria onde o saber se manifesta plenamente.",
-    category: "Linguística",
-    description: "Análise das estruturas fundamentais da comunicação humana durante as aulas de morfologia."
+    url: 'https://i.postimg.cc/sDLJLBwG/Whats-App-Image-2026-05-13-at-18-57-55.jpg',
+    phrase: "Bibliotecas são templos de silêncio que gritam conhecimento.",
+    category: "Pesquisa",
+    description: "Horas dedicadas à pesquisa bibliográfica para fundamentação dos relatórios técnicos."
   },
   {
     id: 2,
@@ -48,25 +48,33 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 6,
-    url: 'https://i.postimg.cc/bNHrSCjQ/Chat-GPT-Image-7-05-2026-21-09-18.png',
-    phrase: "Romper o silêncio é o primeiro passo para salvar vidas.",
-    category: "Projeto",
-    description: "O projeto \"Vozes interrompidas\" mostra a importância de envolver toda a comunidade acadêmica em um projeto."
+    url: 'https://i.postimg.cc/yYRJVk7S/Whats-App-Image-2026-05-13-at-18-57-52.jpg',
+    phrase: "Bibliotecas são templos de silêncio que gritam conhecimento.",
+    category: "Pesquisa",
+    description: "Horas dedicadas à pesquisa bibliográfica para fundamentação dos relatórios técnicos."
   },
   {
     id: 7,
-    url: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&q=80&w=1200',
+    url: 'https://i.postimg.cc/vZp341VN/Whats-App-Image-2026-05-13-at-22-25-37.jpg',
     phrase: "A escrita é o ensaio da eternidade no papel do agora.",
     category: "Produção Textual",
     description: "Oficinas de redação e correção comentada de produções literárias de alunos."
   },
   {
     id: 8,
-    url: 'https://images.unsplash.com/photo-1507733593714-724e615332c6?auto=format&fit=crop&q=80&w=1200',
-    phrase: "Bibliotecas são templos de silêncio que gritam conhecimento.",
-    category: "Pesquisa",
-    description: "Horas dedicadas à pesquisa bibliográfica para fundamentação dos relatórios técnicos."
+    url: 'https://i.postimg.cc/SsLTKDX2/9f2eded6-18ba-4e99-ba9a-c36f2a19a02d.jpg',
+    phrase: "A linguagem é a única pátria onde o saber se manifesta plenamente.",
+    category: "Linguística",
+    description: "Análise das estruturas fundamentais da comunicação humana durante as aulas de morfologia."
+  },
+  {
+    id: 9,
+    url: 'https://i.postimg.cc/bNHrSCjQ/Chat-GPT-Image-7-05-2026-21-09-18.png',
+    phrase: "Romper o silêncio é o primeiro passo para salvar vidas.",
+    category: "Projeto",
+    description: "O projeto \"Vozes interrompidas\" mostra a importância de envolver toda a comunidade acadêmica em um projeto."
   }
+
 ];
 
 interface FullGalleryProps {

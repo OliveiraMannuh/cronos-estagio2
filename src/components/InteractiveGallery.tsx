@@ -29,7 +29,7 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 4,
-    url: 'https://i.postimg.cc/5yrx2wkJ/Whats-App-Image-2026-05-02-at-13-00-29.jpg',
+    url: 'https://i.postimg.cc/QM3cLc59/Whats-App-Image-2026-05-13-at-18-57-54.jpg',
     phrase: "Entre livros e relatórios, a prática docente ganha forma e propósito.",
     category: "Ensino"
   }
