@@ -11,8 +11,8 @@ const students = [
     name: 'José Domingues',
     role: 'Estagiário · Licenciatura em Letras',
     bio: 'Discente em Letras - Português / Licenciatura, com trajetória multidisciplinar que une educação, escrita e arte. Com experiência profissional em design gráfico, ilustrações e serviços editoriais, oferece, portanto, maior dinâmica às práticas pedagógicas no ensino de Língua Portuguesa e Literatura. Tendo como base os estudos de Linguística Textual e de Literatura infantojuvenil, participa, por meio de editais do PAIC, das publicações de contos ilustrados, tendo em vista as escolas públicas do Ensino Fundamental.',
-    linkedin: 'https://linkedin.com',
-    lattes: 'https://lattes.cnpq.br',
+    /*linkedin: 'https://linkedin.com',
+    lattes: 'https://lattes.cnpq.br',*/
     initials: 'A1',
   },
   {
@@ -102,27 +102,35 @@ export const ContatoPage: React.FC<ContatoPageProps> = ({ onBack }) => {
               </p>
 
               {/* Links */}
-              <div className="flex gap-3 pt-2 border-t border-[#1A1A1A]/5">
-                <a
-                  href={student.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-[#7A7A7A] hover:text-[#1A1A1A] transition-colors"
-                >
-                  <Linkedin size={13} />
-                  LinkedIn
-                </a>
-                <span className="text-[#1A1A1A]/10">·</span>
-                <a
-                  href={student.lattes}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-[#7A7A7A] hover:text-[#1A1A1A] transition-colors"
-                >
-                  <ExternalLink size={13} />
-                  Currículo Lattes
-                </a>
-              </div>
+              {(student.linkedin || student.lattes) && (
+                <div className="flex gap-3 pt-2 border-t border-[#1A1A1A]/5">
+                  {student.linkedin && (
+                    <a
+                      href={student.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-[#7A7A7A] hover:text-[#1A1A1A] transition-colors"
+                    >
+                      <Linkedin size={13} />
+                      LinkedIn
+                    </a>
+                  )}
+                  {student.linkedin && student.lattes && (
+                    <span className="text-[#1A1A1A]/10">·</span>
+                  )}
+                  {student.lattes && (
+                    <a
+                      href={student.lattes}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-[11px] uppercase tracking-widest font-bold text-[#7A7A7A] hover:text-[#1A1A1A] transition-colors"
+                    >
+                      <ExternalLink size={13} />
+                      Currículo Lattes
+                    </a>
+                  )}
+                </div>
+              )}
             </motion.div>
           ))}
         </section>
