@@ -34,6 +34,7 @@ import { FullGallery } from './components/FullGallery';
 import { SobrePage } from './components/SobrePage';
 import { InstituicaoPage } from './components/InstituicaoPage';
 import { ContatoPage } from './components/ContatoPage';
+import { PredictionArea } from './components/PredictionArea';
 import { 
   signInWithPopup, 
   GoogleAuthProvider, 
@@ -174,6 +175,7 @@ export default function App() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [settings, setSettings] = useState<UserSettings>({ autoSyncEnabled: false });
+  const [dashboardTab, setDashboardTab] = useState<'registros' | 'predicao'>('predicao');
 
   // Form State
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -660,7 +662,7 @@ export default function App() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="min-h-screen bg-[#FDFCFB] text-[#2C2C2C] font-sans selection:bg-[#E8D5C4]"
+          className="min-h-screen bg-slate-50 font-sans selection:bg-[#00B37E]/20"
         >
           {/* Hidden Global File Input */}
           <input 
@@ -672,187 +674,236 @@ export default function App() {
           />
 
           {/* Header */}
-          <header className="max-w-2xl mx-auto pt-8 sm:pt-12 px-4 sm:px-6 pb-6 sm:pb-8">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-3">
-            <img src="/cronos_estagio/logo.png" alt="Cronos Estágio" className="w-12 h-12 object-contain" />
-            <h1 className="text-2xl font-serif font-semibold tracking-tight">Cronos Estágio</h1>
-          </div>
-          <div className="flex items-center gap-2">
-            <button 
-              onClick={handleLogout}
-              className="p-2 text-[#7A7A7A] hover:text-[#2C2C2C] hover:bg-[#F2E8DF] rounded-xl transition-colors"
-              title="Sair"
-            >
-              <LogOut size={20} />
-            </button>
-          </div>
-        </div>
-        <p className="text-sm text-[#7A7A7A] font-medium uppercase tracking-widest">Estudante de Letras</p>
-      </header>
-
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 pb-24">
-        {/* Progress Card */}
-        <section className="bg-white border border-[#E8E8E8] rounded-3xl p-5 sm:p-8 shadow-sm mb-6 sm:mb-8">
-          <div className="flex justify-between items-end mb-6">
-            <div>
-              <p className="text-sm text-[#7A7A7A] mb-1">Progresso Total</p>
-              <h2 className="text-4xl font-serif font-bold">{formatMinutes(stats.totalMinutes)}</h2>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-[#7A7A7A] mb-1">Meta: {GOAL_HOURS}h</p>
-              <p className={`text-sm font-semibold ${stats.remainingMinutes === 0 ? 'text-green-600' : 'text-[#8B5E3C]'}`}>
-                {stats.remainingMinutes === 0 ? 'Concluído!' : `Faltam ${formatMinutes(stats.remainingMinutes)}`}
-              </p>
-            </div>
-          </div>
-
-          <div className="relative h-3 w-full bg-[#F2E8DF] rounded-full overflow-hidden">
-            <motion.div 
-              initial={{ width: 0 }}
-              animate={{ width: `${stats.progressPercentage}%` }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="absolute top-0 left-0 h-full bg-[#8B5E3C] rounded-full"
-            />
-          </div>
-        </section>
-
-        {/* Actions */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <h3 className="text-lg font-serif font-semibold">Registros</h3>
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <button 
-              onClick={handleExport}
-              disabled={entries.length === 0 || isExporting}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white border border-[#E8E8E8] text-[#2C2C2C] px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#F2E8DF] transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
-              title="Exportar todos os relatórios para DOCX"
-            >
-              {isExporting ? (
-                <Loader2 size={18} className="animate-spin" />
-              ) : (
-                <Download size={18} />
-              )}
-              {isExporting ? 'Processando...' : 'Exportar DOCX'}
-            </button>
-            <button 
-              onClick={handleToggleSync}
-              disabled={isSyncing}
-              className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm ${
-                settings.autoSyncEnabled 
-                  ? 'bg-blue-50 text-blue-600 border border-blue-200' 
-                  : 'bg-white border border-[#E8E8E8] text-[#7A7A7A] hover:bg-[#FDFCFB] hover:border-[#8B5E3C]/30'
-              } disabled:opacity-60 disabled:cursor-not-allowed`}
-              title="Sincronizar e abrir no Google Docs"
-            >
-              {isSyncing ? (
-                <Loader2 size={18} className="animate-spin" />
-              ) : (
-                <div className={`w-2.5 h-2.5 rounded-full ${settings.autoSyncEnabled ? 'bg-blue-500 animate-pulse' : 'bg-[#D1D1D1]'}`} />
-              )}
-              {isSyncing ? 'Sincronizando...' : 'Google Docs'}
-            </button>
-            <button 
-              onClick={() => setIsFormOpen(true)}
-              className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-[#2C2C2C] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-lg shadow-black/10"
-            >
-              <Plus size={18} />
-              Novo Registro
-            </button>
-          </div>
-        </div>
-
-        {/* Entries List */}
-        <div className="space-y-4">
-          {loadError && (
-            <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl flex items-center gap-3">
-              <AlertCircle size={20} />
-              <p className="text-sm font-medium">{loadError}</p>
-            </div>
-          )}
-          <AnimatePresence mode="popLayout">
-            {entries.length === 0 && !loadError ? (
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center py-12 border-2 border-dashed border-[#F2E8DF] rounded-3xl"
-              >
-                <Clock className="mx-auto text-[#D1D1D1] mb-3" size={32} />
-                <p className="text-[#7A7A7A]">Nenhum registro encontrado.</p>
-              </motion.div>
-            ) : (
-              entries.map((entry) => (
-                <motion.div
-                  key={entry.id}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="group bg-white border border-[#E8E8E8] rounded-2xl p-5 flex items-center justify-between hover:border-[#8B5E3C]/30 transition-all hover:shadow-md cursor-pointer"
-                  onClick={() => {
-                    setViewingEntry(entry);
-                    setTempReportText(entry.reportText || '');
-                    setTempDate(entry.date);
-                    setTempStartTime(entry.startTime);
-                    setTempEndTime(entry.endTime);
-                  }}
+          <header className="bg-white border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <img src="/cronos_estagio/logo.png" alt="Cronos Estágio" className="w-8 h-8 object-contain" />
+                <h1 className="text-xl font-serif font-semibold tracking-tight text-slate-900">Cronos Estágio</h1>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-slate-500 hidden sm:block uppercase tracking-widest">Estudante de Letras</span>
+                <button 
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors text-sm font-medium"
+                  title="Sair"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#FDFCFB] border border-[#F2E8DF] rounded-xl flex flex-col items-center justify-center text-[#8B5E3C]">
-                      <span className="text-[10px] font-bold uppercase leading-none">
-                        {new Date(entry.date + 'T00:00:00').toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '')}
-                      </span>
-                      <span className="text-lg font-serif font-bold leading-none">
-                        {new Date(entry.date + 'T00:00:00').getDate()}
-                      </span>
+                  <LogOut size={16} />
+                  Sair
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-24">
+            <div className="flex justify-center mb-8">
+              <div className="inline-flex bg-white rounded-full p-1 border border-slate-200 shadow-sm">
+                <button 
+                  onClick={() => setDashboardTab('predicao')}
+                  className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
+                    dashboardTab === 'predicao' 
+                      ? 'bg-[#00B37E] text-white shadow-md' 
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Predição
+                </button>
+                <button 
+                  onClick={() => setDashboardTab('registros')}
+                  className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
+                    dashboardTab === 'registros' 
+                      ? 'bg-slate-900 text-white shadow-md' 
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Registros
+                </button>
+              </div>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {dashboardTab === 'predicao' ? (
+                <motion.div
+                  key="predicao"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <PredictionArea />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="registros"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                  className="max-w-2xl mx-auto"
+                >
+                  {/* Progress Card */}
+                  <section className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-8 shadow-sm mb-6 sm:mb-8">
+                    <div className="flex justify-between items-end mb-6">
+                      <div>
+                        <p className="text-sm text-slate-500 mb-1">Progresso Total</p>
+                        <h2 className="text-4xl font-serif font-bold text-slate-900">{formatMinutes(stats.totalMinutes)}</h2>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-slate-500 mb-1">Meta: {GOAL_HOURS}h</p>
+                        <p className={`text-sm font-semibold ${stats.remainingMinutes === 0 ? 'text-[#00B37E]' : 'text-slate-700'}`}>
+                          {stats.remainingMinutes === 0 ? 'Concluído!' : `Faltam ${formatMinutes(stats.remainingMinutes)}`}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2 text-sm text-[#7A7A7A] mb-0.5">
-                        <Clock size={14} />
-                        <span>{entry.startTime} — {entry.endTime}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <p className="font-medium text-[#2C2C2C]">{formatMinutes(entry.durationMinutes)}</p>
-                        {entry.reportText && (
-                          <span className="flex items-center gap-1 text-[10px] bg-[#F2E8DF] text-[#8B5E3C] px-2 py-0.5 rounded-full font-bold uppercase">
-                            <FileText size={10} /> Relatório
-                          </span>
+
+                    <div className="relative h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: `${stats.progressPercentage}%` }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="absolute top-0 left-0 h-full bg-slate-800 rounded-full"
+                      />
+                    </div>
+                  </section>
+
+                  {/* Actions */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <h3 className="text-lg font-serif font-semibold text-slate-900">Registros</h3>
+                    <div className="flex items-center gap-3 w-full sm:w-auto">
+                      <button 
+                        onClick={handleExport}
+                        disabled={entries.length === 0 || isExporting}
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                        title="Exportar todos os relatórios para DOCX"
+                      >
+                        {isExporting ? (
+                          <Loader2 size={18} className="animate-spin" />
+                        ) : (
+                          <Download size={18} />
                         )}
-                      </div>
+                        {isExporting ? 'Processando...' : 'Exportar DOCX'}
+                      </button>
+                      <button 
+                        onClick={handleToggleSync}
+                        disabled={isSyncing}
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm ${
+                          settings.autoSyncEnabled 
+                            ? 'bg-blue-50 text-blue-600 border border-blue-200' 
+                            : 'bg-white border border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-300'
+                        } disabled:opacity-60 disabled:cursor-not-allowed`}
+                        title="Sincronizar e abrir no Google Docs"
+                      >
+                        {isSyncing ? (
+                          <Loader2 size={18} className="animate-spin" />
+                        ) : (
+                          <div className={`w-2.5 h-2.5 rounded-full ${settings.autoSyncEnabled ? 'bg-blue-500 animate-pulse' : 'bg-slate-300'}`} />
+                        )}
+                        {isSyncing ? 'Sincronizando...' : 'Google Docs'}
+                      </button>
+                      <button 
+                        onClick={() => setIsFormOpen(true)}
+                        className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors shadow-lg shadow-black/10"
+                      >
+                        <Plus size={18} />
+                        Novo Registro
+                      </button>
                     </div>
                   </div>
-                  <button 
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (deletingId === entry.id) {
-                        removeEntry(entry.id);
-                        setDeletingId(null);
-                      } else {
-                        setDeletingId(entry.id);
-                      }
-                    }}
-                    onMouseLeave={() => deletingId === entry.id && setDeletingId(null)}
-                    className={`p-2 transition-all rounded-xl flex items-center gap-2 whitespace-nowrap ${
-                      deletingId === entry.id 
-                        ? 'bg-red-500 text-white opacity-100 shadow-md ring-2 ring-red-200' 
-                        : 'text-[#D1D1D1] hover:text-red-500 hover:bg-red-50 opacity-100 md:opacity-0 group-hover:opacity-100'
-                    }`}
-                  >
-                    {deletingId === entry.id ? (
-                      <>
-                        <Trash2 size={14} />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Confirmar?</span>
-                      </>
-                    ) : (
-                      <Trash2 size={18} />
+
+                  {/* Entries List */}
+                  <div className="space-y-4">
+                    {loadError && (
+                      <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl flex items-center gap-3">
+                        <AlertCircle size={20} />
+                        <p className="text-sm font-medium">{loadError}</p>
+                      </div>
                     )}
-                  </button>
+                    <AnimatePresence mode="popLayout">
+                      {entries.length === 0 && !loadError ? (
+                        <motion.div 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          className="text-center py-12 border-2 border-dashed border-slate-200 rounded-3xl"
+                        >
+                          <Clock className="mx-auto text-slate-300 mb-3" size={32} />
+                          <p className="text-slate-500">Nenhum registro encontrado.</p>
+                        </motion.div>
+                      ) : (
+                        entries.map((entry) => (
+                          <motion.div
+                            key={entry.id}
+                            layout
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            className="group bg-white border border-slate-200 rounded-2xl p-5 flex items-center justify-between hover:border-slate-300 transition-all hover:shadow-md cursor-pointer"
+                            onClick={() => {
+                              setViewingEntry(entry);
+                              setTempReportText(entry.reportText || '');
+                              setTempDate(entry.date);
+                              setTempStartTime(entry.startTime);
+                              setTempEndTime(entry.endTime);
+                            }}
+                          >
+                            <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 bg-white border border-slate-200 rounded-xl flex flex-col items-center justify-center text-slate-700">
+                                <span className="text-[10px] font-bold uppercase leading-none text-[#00B37E]">
+                                  {new Date(entry.date + 'T00:00:00').toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '')}
+                                </span>
+                                <span className="text-lg font-serif font-bold leading-none">
+                                  {new Date(entry.date + 'T00:00:00').getDate()}
+                                </span>
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2 text-sm text-slate-500 mb-0.5">
+                                  <Clock size={14} />
+                                  <span>{entry.startTime} — {entry.endTime}</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <p className="font-medium text-slate-900">{formatMinutes(entry.durationMinutes)}</p>
+                                  {entry.reportText && (
+                                    <span className="flex items-center gap-1 text-[10px] bg-[#00B37E]/10 text-[#00B37E] px-2 py-0.5 rounded-full font-bold uppercase border border-[#00B37E]/20">
+                                      <FileText size={10} /> Relatório
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <button 
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (deletingId === entry.id) {
+                                  removeEntry(entry.id);
+                                  setDeletingId(null);
+                                } else {
+                                  setDeletingId(entry.id);
+                                }
+                              }}
+                              onMouseLeave={() => deletingId === entry.id && setDeletingId(null)}
+                              className={`p-2 transition-all rounded-xl flex items-center gap-2 whitespace-nowrap ${
+                                deletingId === entry.id 
+                                  ? 'bg-red-500 text-white opacity-100 shadow-md ring-2 ring-red-200' 
+                                  : 'text-slate-300 hover:text-red-500 hover:bg-red-50 opacity-100 md:opacity-0 group-hover:opacity-100'
+                              }`}
+                            >
+                              {deletingId === entry.id ? (
+                                <>
+                                  <Trash2 size={14} />
+                                  <span className="text-[10px] font-bold uppercase tracking-wider">Confirmar?</span>
+                                </>
+                              ) : (
+                                <Trash2 size={18} />
+                              )}
+                            </button>
+                          </motion.div>
+                        ))
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
-              ))
-            )}
-          </AnimatePresence>
-        </div>
-      </main>
+              )}
+            </AnimatePresence>
+          </main>
 
       {/* Modal Form */}
       <AnimatePresence>
