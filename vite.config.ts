@@ -10,9 +10,9 @@ export default defineConfig(({mode}) => {
     name: 'normalize-base-trailing-slash',
     configureServer(server: any) {
       server.middlewares.use((req: any, res: any, next: any) => {
-        if (req.url === '/cronos_estagio') {
+        if (req.url === '/cronos_estagio2') {
           res.statusCode = 302;
-          res.setHeader('Location', '/cronos_estagio/');
+          res.setHeader('Location', '/cronos_estagio2/');
           res.end();
           return;
         }
@@ -24,7 +24,7 @@ export default defineConfig(({mode}) => {
 
   return {
     plugins: [react(), tailwindcss(), normalizeBasePlugin],
-    base: '/cronos_estagio/',
+    base: '/cronos-estagio2/',
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || ""),
     },
