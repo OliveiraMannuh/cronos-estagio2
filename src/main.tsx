@@ -6,7 +6,7 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter basename="/cronos_estagio">
+    <BrowserRouter basename="/cronos-estagio2">
       <App />
     </BrowserRouter>
   </StrictMode>,
