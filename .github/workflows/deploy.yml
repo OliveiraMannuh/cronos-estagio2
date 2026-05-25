@@ -32,6 +32,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Recreate Firebase Config
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        run: |
+          cat << EOF > firebase-applet-config.json
+          {
+            "apiKey": "$FIREBASE_API_KEY",
+            "authDomain": "cronos-estagio-2.firebaseapp.com",
+            "projectId": "cronos-estagio-2",
+            "storageBucket": "cronos-estagio-2.firebasestorage.app",
+            "messagingSenderId": "210740554769",
+            "appId": "1:210740554769:web:b3b08a37312ccae51f95b0",
+            "measurementId": "G-01C5TX84X0"
+          }
+          EOF
+
       - name: Build
         run: npm run build
         env:
