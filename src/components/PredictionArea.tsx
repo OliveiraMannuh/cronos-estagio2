@@ -8,7 +8,8 @@ import {
   TrendingUp,
   Award,
   Settings2,
-  Lightbulb
+  Lightbulb,
+  AlertCircle
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
