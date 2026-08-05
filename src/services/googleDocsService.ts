@@ -141,6 +141,99 @@ export const appendToDoc = async (accessToken: string, docId: string, content: {
 };
 
 /**
+ * Replaces the doc content with a two-column table (Data / Conteúdo) built
+ * from the given rows. Used to export the class schedule to Google Docs.
+ */
+export const createScheduleTableDoc = async (
+  accessToken: string,
+  docId: string,
+  rows: { date: string; content?: string }[]
+) => {
+  const numRows = rows.length + 1; // + header row
+  const numCols = 2;
+
+  const docResponse = await fetch(`${DOCS_API_BASE}/${docId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!docResponse.ok) {
+    throw await buildGoogleApiError(docResponse, 'createScheduleTableDoc.getDocument');
+  }
+
+  const docData = await docResponse.json();
+  const bodyContent = docData?.body?.content || [];
+  const endIndex = bodyContent.length > 0 ? bodyContent[bodyContent.length - 1].endIndex : 2;
+
+  const setupRequests: any[] = [];
+  if (endIndex > 2) {
+    setupRequests.push({
+      deleteContentRange: { range: { startIndex: 1, endIndex: endIndex - 1 } },
+    });
+  }
+  setupRequests.push({
+    insertTable: { rows: numRows, columns: numCols, location: { index: 1 } },
+  });
+
+  const insertTableResponse = await fetch(`${DOCS_API_BASE}/${docId}:batchUpdate`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ requests: setupRequests }),
+  });
+
+  if (!insertTableResponse.ok) {
+    throw await buildGoogleApiError(insertTableResponse, 'createScheduleTableDoc.insertTable');
+  }
+
+  // Re-fetch the document to learn the cell start indexes the API assigned to the new table.
+  const updatedDocResponse = await fetch(`${DOCS_API_BASE}/${docId}`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!updatedDocResponse.ok) {
+    throw await buildGoogleApiError(updatedDocResponse, 'createScheduleTableDoc.getUpdatedDocument');
+  }
+
+  const updatedDocData = await updatedDocResponse.json();
+  const table = (updatedDocData?.body?.content || []).find((el: any) => el.table)?.table;
+
+  if (!table) {
+    throw new Error('Tabela não encontrada no documento após a inserção.');
+  }
+
+  const cellTexts = [['Data', 'Conteúdo'], ...rows.map(r => [r.date, r.content || ''])];
+
+  const insertRequests: { index: number; text: string }[] = [];
+  table.tableRows.forEach((tableRow: any, rowIdx: number) => {
+    tableRow.tableCells.forEach((cell: any, colIdx: number) => {
+      const text = cellTexts[rowIdx]?.[colIdx];
+      const startIndex = cell.content?.[0]?.paragraph?.elements?.[0]?.startIndex;
+      if (!text || startIndex === undefined) return;
+      insertRequests.push({ index: startIndex, text });
+    });
+  });
+
+  // Insert from the bottom of the doc up, so earlier insertions don't shift the
+  // indexes of cells still pending.
+  insertRequests.sort((a, b) => b.index - a.index);
+
+  if (insertRequests.length > 0) {
+    const fillResponse = await fetch(`${DOCS_API_BASE}/${docId}:batchUpdate`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        requests: insertRequests.map(({ index, text }) => ({
+          insertText: { location: { index }, text },
+        })),
+      }),
+    });
+
+    if (!fillResponse.ok) {
+      throw await buildGoogleApiError(fillResponse, 'createScheduleTableDoc.fillCells');
+    }
+  }
+};
+
+/**
  * Completely replaces doc content with all entries (Syncing full state)
  */
 export const syncAllEntriesToDoc = async (

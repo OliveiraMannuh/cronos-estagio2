@@ -27,7 +27,7 @@ export const PredictionArea: React.FC = () => {
   const [goalHours, setGoalHours] = useState<number>(72);
   const [completedHours, setCompletedHours] = useState<number>(0);
   const [hoursPerDay, setHoursPerDay] = useState<number>(6);
-  const [startDate, setStartDate] = useState<string>('2026-05-21');
+  const [startDate, setStartDate] = useState<string>('2026-08-18');
   const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]); // Seg-Sex
   const [activeTab, setActiveTab] = useState<'schedule' | 'analysis'>('schedule');
 
@@ -47,7 +47,7 @@ export const PredictionArea: React.FC = () => {
     setGoalHours(72);
     setCompletedHours(0);
     setHoursPerDay(6);
-    setStartDate('2026-05-21');
+    setStartDate('2026-08-18');
     setWeekdays();
   };
 

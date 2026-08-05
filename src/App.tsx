@@ -174,6 +174,7 @@ export default function App() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isGeneratingSchedule, setIsGeneratingSchedule] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [settings, setSettings] = useState<UserSettings>({ autoSyncEnabled: false });
   const [dashboardTab, setDashboardTab] = useState<'registros' | 'predicao' | 'aulas'>('predicao');
@@ -513,8 +514,9 @@ export default function App() {
       return;
     }
 
-    // Open the tab from user gesture to minimize popup blocking.
-    const docsTab = window.open('about:blank', '_blank');
+    // Only pre-open the tab when we won't trigger a login popup — opening a second
+    // window while signInWithPopup runs breaks Firebase's auth persistence.
+    let docsTab = accessToken ? window.open('about:blank', '_blank') : null;
 
     setIsSyncing(true);
 
@@ -523,6 +525,7 @@ export default function App() {
 
       if (!token) {
         token = await handleLogin();
+        if (token) docsTab = window.open('about:blank', '_blank');
       }
 
       if (!token) {
@@ -566,6 +569,63 @@ export default function App() {
     if (!settings.autoSyncEnabled || !accessToken || !user || entries.length === 0) return;
     syncToGoogleDocs(entries);
   }, [entries, settings.autoSyncEnabled, accessToken, user]);
+
+  const handleGenerateScheduleDoc = async (classDates: string[]) => {
+    if (!user) {
+      alert("Faça login para gerar o documento no Google Docs.");
+      return;
+    }
+
+    // Only pre-open the tab when we won't trigger a login popup — opening a second
+    // window while signInWithPopup runs breaks Firebase's auth persistence.
+    let docsTab = accessToken ? window.open('about:blank', '_blank') : null;
+
+    setIsGeneratingSchedule(true);
+
+    try {
+      let token = accessToken;
+      if (!token) {
+        token = await handleLogin();
+        if (token) docsTab = window.open('about:blank', '_blank');
+      }
+
+      if (!token) {
+        if (docsTab && !docsTab.closed) docsTab.close();
+        alert("Não foi possível autorizar o acesso ao Google Docs.");
+        return;
+      }
+
+      const title = 'Cronos Estágio - Cronograma de Aulas';
+      let docId = await GoogleDocsService.findDocByTitle(token, title);
+      if (!docId) {
+        docId = await GoogleDocsService.createDoc(token, title);
+      }
+
+      if (!docId) {
+        throw new Error('Não foi possível criar ou localizar o Google Docs.');
+      }
+
+      const rows = classDates.map(iso => {
+        const [year, month, day] = iso.split('-');
+        return { date: `${day}/${month}/${year}`, content: '' };
+      });
+
+      await GoogleDocsService.createScheduleTableDoc(token, docId, rows);
+
+      const googleDocUrl = `https://docs.google.com/document/d/${docId}/edit`;
+      if (docsTab && !docsTab.closed) {
+        docsTab.location.href = googleDocUrl;
+      } else {
+        window.open(googleDocUrl, '_blank', 'noopener,noreferrer');
+      }
+    } catch (error) {
+      console.error('Erro ao gerar cronograma no Google Docs:', error);
+      if (docsTab && !docsTab.closed) docsTab.close();
+      alert('Falha ao gerar o documento no Google Docs. Verifique permissões e tente novamente.');
+    } finally {
+      setIsGeneratingSchedule(false);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -678,7 +738,7 @@ export default function App() {
           <header className="bg-white border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img src="/cronos_estagio/logo.png" alt="Cronos Estágio" className="w-8 h-8 object-contain" />
+                <img src={`${(import.meta as any).env.BASE_URL}logo.png`} alt="Cronos Estágio" className="w-8 h-8 object-contain" />
                 <h1 className="text-xl font-serif font-semibold tracking-tight text-slate-900">Cronos Estágio</h1>
               </div>
               <div className="flex items-center gap-4">
@@ -750,7 +810,10 @@ export default function App() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ClassSchedule />
+                  <ClassSchedule
+                    onGenerateDoc={handleGenerateScheduleDoc}
+                    isGeneratingDoc={isGeneratingSchedule}
+                  />
                 </motion.div>
               ) : (
                 <motion.div
