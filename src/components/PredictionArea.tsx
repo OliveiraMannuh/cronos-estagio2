@@ -12,6 +12,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { getHolidaysInRange, toISODate } from '../utils/holidays';
 
 const WEEKDAYS = [
   { id: 1, label: 'Seg', name: 'Segunda-feira' },
@@ -26,9 +27,9 @@ const WEEKDAYS = [
 export const PredictionArea: React.FC = () => {
   const [goalHours, setGoalHours] = useState<number>(72);
   const [completedHours, setCompletedHours] = useState<number>(0);
-  const [hoursPerDay, setHoursPerDay] = useState<number>(6);
+  const [hoursPerDay, setHoursPerDay] = useState<number>(2);
   const [startDate, setStartDate] = useState<string>('2026-08-18');
-  const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]); // Seg-Sex
+  const [selectedDays, setSelectedDays] = useState<number[]>([2, 3, 5]); // Ter-Qua-Sex
   const [activeTab, setActiveTab] = useState<'schedule' | 'analysis'>('schedule');
 
   const toggleDay = (dayId: number) => {
@@ -46,9 +47,9 @@ export const PredictionArea: React.FC = () => {
   const resetParams = () => {
     setGoalHours(72);
     setCompletedHours(0);
-    setHoursPerDay(6);
+    setHoursPerDay(2);
     setStartDate('2026-08-18');
-    setWeekdays();
+    setSelectedDays([2, 3, 5]);
   };
 
   const timeline = useMemo(() => {
