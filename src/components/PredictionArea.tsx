@@ -331,7 +331,7 @@ export const PredictionArea: React.FC = () => {
                   {timeline.length}
                 </span>
               </button>
-              <button 
+              <button
                 onClick={() => setActiveTab('analysis')}
                 className={`px-4 py-4 text-sm font-bold border-b-2 transition-colors flex items-center gap-2 ${activeTab === 'analysis' ? 'border-[#00B37E] text-[#00B37E]' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
               >

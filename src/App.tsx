@@ -35,6 +35,7 @@ import { SobrePage } from './components/SobrePage';
 import { InstituicaoPage } from './components/InstituicaoPage';
 import { ContatoPage } from './components/ContatoPage';
 import { PredictionArea } from './components/PredictionArea';
+import { ClassSchedule } from './components/ClassSchedule';
 import { 
   signInWithPopup, 
   GoogleAuthProvider, 
@@ -175,7 +176,7 @@ export default function App() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [settings, setSettings] = useState<UserSettings>({ autoSyncEnabled: false });
-  const [dashboardTab, setDashboardTab] = useState<'registros' | 'predicao'>('predicao');
+  const [dashboardTab, setDashboardTab] = useState<'registros' | 'predicao' | 'aulas'>('predicao');
 
   // Form State
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -707,15 +708,25 @@ export default function App() {
                 >
                   Predição
                 </button>
-                <button 
+                <button
                   onClick={() => setDashboardTab('registros')}
                   className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
-                    dashboardTab === 'registros' 
-                      ? 'bg-slate-900 text-white shadow-md' 
+                    dashboardTab === 'registros'
+                      ? 'bg-slate-900 text-white shadow-md'
                       : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
                   }`}
                 >
                   Registros
+                </button>
+                <button
+                  onClick={() => setDashboardTab('aulas')}
+                  className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${
+                    dashboardTab === 'aulas'
+                      ? 'bg-slate-900 text-white shadow-md'
+                      : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+                  }`}
+                >
+                  Cronograma de Aulas
                 </button>
               </div>
             </div>
@@ -730,6 +741,16 @@ export default function App() {
                   transition={{ duration: 0.3 }}
                 >
                   <PredictionArea />
+                </motion.div>
+              ) : dashboardTab === 'aulas' ? (
+                <motion.div
+                  key="aulas"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ClassSchedule />
                 </motion.div>
               ) : (
                 <motion.div
