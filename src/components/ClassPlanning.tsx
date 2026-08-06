@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { NotebookPen, ChevronDown } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { NotebookPen, ChevronDown, Plus, X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { PLANNING_LESSONS, PlanningSubject } from '../data/classPlanning';
+import { PLANNING_LESSONS, PlanningLesson, PlanningSubject } from '../data/classPlanning';
+import { SCHEDULE_DATES, scheduleDateSortKey } from '../data/scheduleDates';
+import { formatPlanningText } from '../utils/formatPlanningText';
 
 type Tab = 'geral' | PlanningSubject;
 
@@ -11,6 +13,21 @@ const TAB_OPTIONS: { id: Tab; label: string }[] = [
   { id: 'interpretacao', label: 'Interpretação de Texto' },
   { id: 'redacao', label: 'Redação' },
 ];
+
+const STORAGE_KEY = 'classPlanningCustomLessons';
+
+function loadCustomLessons(): PlanningLesson[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCustomLessons(lessons: PlanningLesson[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(lessons));
+}
 
 const markdownComponents = {
   h1: (props: any) => <h1 className="text-xl font-bold text-slate-900 mt-6 mb-3" {...props} />,
@@ -42,15 +59,69 @@ const markdownComponents = {
   code: (props: any) => <code className="bg-slate-100 text-slate-700 rounded px-1.5 py-0.5 text-xs" {...props} />,
 };
 
+const emptyForm = {
+  subject: 'interpretacao' as PlanningSubject,
+  date: SCHEDULE_DATES[0]?.date ?? '',
+  title: '',
+  raw: '',
+};
+
 export const ClassPlanning: React.FC = () => {
   const [tab, setTab] = useState<Tab>('geral');
   const [openLesson, setOpenLesson] = useState<string | null>(`${PLANNING_LESSONS[0]?.date}-${PLANNING_LESSONS[0]?.subject}`);
+  const [customLessons, setCustomLessons] = useState<PlanningLesson[]>(() => loadCustomLessons());
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState(emptyForm);
 
-  const lessons =
-    tab === 'geral' ? PLANNING_LESSONS : PLANNING_LESSONS.filter(l => l.subject === tab);
+  useEffect(() => {
+    saveCustomLessons(customLessons);
+  }, [customLessons]);
+
+  const allLessons = useMemo(() => {
+    const merged = [...PLANNING_LESSONS];
+    customLessons.forEach(custom => {
+      const idx = merged.findIndex(l => l.date === custom.date && l.subject === custom.subject);
+      if (idx >= 0) merged[idx] = custom;
+      else merged.push(custom);
+    });
+    return merged.sort((a, b) => scheduleDateSortKey(a.date) - scheduleDateSortKey(b.date));
+  }, [customLessons]);
+
+  const lessons = tab === 'geral' ? allLessons : allLessons.filter(l => l.subject === tab);
 
   const toggleLesson = (key: string) => {
     setOpenLesson(prev => (prev === key ? null : key));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.date || !form.title.trim() || !form.raw.trim()) return;
+
+    const day = SCHEDULE_DATES.find(d => d.date === form.date)?.day ?? '';
+    const markdown = formatPlanningText(form.raw, form.title);
+
+    const newLesson: PlanningLesson = {
+      date: form.date,
+      day,
+      subject: form.subject,
+      title: form.title.trim(),
+      markdown,
+    };
+
+    setCustomLessons(prev => {
+      const idx = prev.findIndex(l => l.date === newLesson.date && l.subject === newLesson.subject);
+      if (idx >= 0) {
+        const next = [...prev];
+        next[idx] = newLesson;
+        return next;
+      }
+      return [...prev, newLesson];
+    });
+
+    setOpenLesson(`${newLesson.date}-${newLesson.subject}`);
+    setTab(newLesson.subject);
+    setForm(emptyForm);
+    setShowForm(false);
   };
 
   return (
@@ -69,7 +140,102 @@ export const ClassPlanning: React.FC = () => {
             da aula, diferenciação para a turma multisseriada e avaliação formativa.
           </p>
         </div>
+        <button
+          onClick={() => setShowForm(v => !v)}
+          className="flex items-center justify-center gap-2 bg-[#0F172A] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-slate-800 transition-colors shrink-0"
+        >
+          {showForm ? <X size={18} /> : <Plus size={18} />}
+          {showForm ? 'Cancelar' : 'Cadastrar aula'}
+        </button>
       </header>
+
+      {showForm && (
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-6 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Disciplina</label>
+              <select
+                value={form.subject}
+                onChange={e => setForm(f => ({ ...f, subject: e.target.value as PlanningSubject }))}
+                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#00B37E]/30"
+              >
+                <option value="interpretacao">Interpretação de Texto</option>
+                <option value="redacao">Redação</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Data (cronograma)</label>
+              <select
+                value={form.date}
+                onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
+                className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#00B37E]/30"
+              >
+                {SCHEDULE_DATES.map(d => (
+                  <option key={d.date} value={d.date}>
+                    {d.date} — {d.day}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Título da aula</label>
+            <input
+              type="text"
+              value={form.title}
+              onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+              placeholder="Ex.: Leitura x interpretação: decodificar, compreender e inferir"
+              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#00B37E]/30"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+              Texto do planejamento (cole aqui — será formatado automaticamente)
+            </label>
+            <textarea
+              value={form.raw}
+              onChange={e => setForm(f => ({ ...f, raw: e.target.value }))}
+              rows={10}
+              placeholder="Cole o texto do plano de aula. Linhas como &quot;Tema: ...&quot;, &quot;1. Objetivos da aula&quot; ou &quot;Etapa 1 — ...&quot; são reconhecidas e formatadas automaticamente."
+              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-700 font-mono focus:outline-none focus:ring-2 focus:ring-[#00B37E]/30"
+              required
+            />
+          </div>
+
+          {form.raw.trim() && (
+            <div>
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Pré-visualização formatada</div>
+              <div className="border border-slate-100 rounded-lg p-4 bg-slate-50 max-h-64 overflow-y-auto">
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+                  {formatPlanningText(form.raw, form.title)}
+                </ReactMarkdown>
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setForm(emptyForm);
+                setShowForm(false);
+              }}
+              className="px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-50 border border-slate-200"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-full text-sm font-bold text-white bg-[#00B37E] hover:bg-[#00966b] transition-colors"
+            >
+              Salvar plano de aula
+            </button>
+          </div>
+        </form>
+      )}
 
       <div className="flex gap-2 mb-6">
         {TAB_OPTIONS.map(opt => (
