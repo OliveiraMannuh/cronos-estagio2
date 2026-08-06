@@ -62,6 +62,7 @@ export function getBrazilianHolidays(year: number): Holiday[] {
     { date: `${year}-03-25`, name: 'Abolição da Escravatura no Ceará', scope: 'estadual' },
     // Municipal - Fortaleza
     { date: `${year}-08-15`, name: 'Nossa Senhora da Assunção (Padroeira de Fortaleza)', scope: 'municipal' },
+    { date: `${year}-10-28`, name: 'Dia do Servidor Público', scope: 'municipal' },
   ];
 }
 
