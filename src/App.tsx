@@ -570,7 +570,7 @@ export default function App() {
     syncToGoogleDocs(entries);
   }, [entries, settings.autoSyncEnabled, accessToken, user]);
 
-  const handleGenerateScheduleDoc = async (classDates: string[]) => {
+  const handleGenerateScheduleDoc = async (rows: { date: string; content: string }[]) => {
     if (!user) {
       alert("Faça login para gerar o documento no Google Docs.");
       return;
@@ -604,11 +604,6 @@ export default function App() {
       if (!docId) {
         throw new Error('Não foi possível criar ou localizar o Google Docs.');
       }
-
-      const rows = classDates.map(iso => {
-        const [year, month, day] = iso.split('-');
-        return { date: `${day}/${month}/${year}`, content: '' };
-      });
 
       await GoogleDocsService.createScheduleTableDoc(token, docId, rows);
 
