@@ -52,37 +52,48 @@ export const PredictionArea: React.FC = () => {
     setSelectedDays([2, 3, 5]);
   };
 
-  const timeline = useMemo(() => {
+  const holidaysMap = useMemo(() => {
+    const startYear = new Date(startDate + 'T12:00:00').getFullYear();
+    return getHolidaysInRange(startYear, startYear + 1);
+  }, [startDate]);
+
+  const { timeline, skippedHolidays } = useMemo(() => {
     if (selectedDays.length === 0 || hoursPerDay <= 0 || goalHours <= completedHours) {
-      return [];
+      return { timeline: [], skippedHolidays: [] };
     }
 
     // Set time to midday to avoid timezone edge cases when adding days
     let current = new Date(startDate + 'T12:00:00');
     let accum = completedHours;
     const result = [];
+    const holidaysHit: { date: Date; name: string }[] = [];
     let dayCount = 1;
 
     // Safety limit of 365 days max calculation
     let iterations = 0;
     while (accum < goalHours && iterations < 365) {
       if (selectedDays.includes(current.getDay())) {
-        const needed = goalHours - accum;
-        const hoursToday = Math.min(hoursPerDay, needed);
-        accum += hoursToday;
-        
-        result.push({
-          index: dayCount++,
-          date: new Date(current),
-          hours: hoursToday,
-          accumulated: accum
-        });
+        const holiday = holidaysMap.get(toISODate(current));
+        if (holiday) {
+          holidaysHit.push({ date: new Date(current), name: holiday.name });
+        } else {
+          const needed = goalHours - accum;
+          const hoursToday = Math.min(hoursPerDay, needed);
+          accum += hoursToday;
+
+          result.push({
+            index: dayCount++,
+            date: new Date(current),
+            hours: hoursToday,
+            accumulated: accum
+          });
+        }
       }
       current.setDate(current.getDate() + 1);
       iterations++;
     }
-    return result;
-  }, [goalHours, completedHours, hoursPerDay, startDate, selectedDays]);
+    return { timeline: result, skippedHolidays: holidaysHit };
+  }, [goalHours, completedHours, hoursPerDay, startDate, selectedDays, holidaysMap]);
 
   const lastDay = timeline.length > 0 ? timeline[timeline.length - 1] : null;
   const calendarDays = lastDay 
@@ -380,9 +391,36 @@ export const PredictionArea: React.FC = () => {
                       </div>
                     )}
                   </div>
+
+                  {skippedHolidays.length > 0 && (
+                    <div className="mt-6">
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">
+                        Feriados desconsiderados na contagem ({skippedHolidays.length})
+                      </div>
+                      <div className="space-y-2">
+                        {skippedHolidays.map((h, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between gap-4 p-3 rounded-xl border border-amber-200 bg-amber-50 text-amber-900"
+                          >
+                            <div className="flex items-center gap-3">
+                              <AlertCircle size={16} className="text-amber-500 shrink-0" />
+                              <div>
+                                <div className="font-bold text-sm capitalize">
+                                  {h.date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                </div>
+                                <div className="text-xs text-amber-700">{h.name}</div>
+                              </div>
+                            </div>
+                            <span className="text-[10px] font-bold uppercase text-amber-500 shrink-0">Feriado</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
-              
+
               {activeTab === 'analysis' && (
                 <div className="space-y-4">
                   <div className="p-5 bg-blue-50 border border-blue-100 text-blue-900 rounded-2xl flex gap-4 items-start">
