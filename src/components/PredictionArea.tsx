@@ -14,6 +14,12 @@ import {
 import { motion } from 'motion/react';
 import { getHolidaysInRange, toISODate } from '../utils/holidays';
 
+// Dias sem aula que não são feriados oficiais, mas já estão previstos no cronograma
+// (ex.: 16/10, provável dia "imprensado" entre aulas — ver ClassSchedule.tsx).
+const EXTRA_NON_CLASS_DAYS: { month: number; day: number; name: string }[] = [
+  { month: 10, day: 16, name: 'Dia sem aula (previsto)' },
+];
+
 const WEEKDAYS = [
   { id: 1, label: 'Seg', name: 'Segunda-feira' },
   { id: 2, label: 'Ter', name: 'Terça-feira' },
@@ -28,7 +34,7 @@ export const PredictionArea: React.FC = () => {
   const [goalHours, setGoalHours] = useState<number>(72);
   const [completedHours, setCompletedHours] = useState<number>(0);
   const [hoursPerDay, setHoursPerDay] = useState<number>(2);
-  const [startDate, setStartDate] = useState<string>('2026-08-18');
+  const [startDate, setStartDate] = useState<string>('2026-08-19');
   const [selectedDays, setSelectedDays] = useState<number[]>([2, 3, 5]); // Ter-Qua-Sex
   const [activeTab, setActiveTab] = useState<'schedule' | 'analysis'>('schedule');
 
@@ -48,13 +54,25 @@ export const PredictionArea: React.FC = () => {
     setGoalHours(72);
     setCompletedHours(0);
     setHoursPerDay(2);
-    setStartDate('2026-08-18');
+    setStartDate('2026-08-19');
     setSelectedDays([2, 3, 5]);
   };
 
   const holidaysMap = useMemo(() => {
     const startYear = new Date(startDate + 'T12:00:00').getFullYear();
     return getHolidaysInRange(startYear, startYear + 1);
+  }, [startDate]);
+
+  const extraSkipMap = useMemo(() => {
+    const startYear = new Date(startDate + 'T12:00:00').getFullYear();
+    const map = new Map<string, string>();
+    for (const y of [startYear, startYear + 1]) {
+      for (const d of EXTRA_NON_CLASS_DAYS) {
+        const iso = `${y}-${String(d.month).padStart(2, '0')}-${String(d.day).padStart(2, '0')}`;
+        map.set(iso, d.name);
+      }
+    }
+    return map;
   }, [startDate]);
 
   const { timeline, skippedHolidays } = useMemo(() => {
@@ -66,16 +84,20 @@ export const PredictionArea: React.FC = () => {
     let current = new Date(startDate + 'T12:00:00');
     let accum = completedHours;
     const result = [];
-    const holidaysHit: { date: Date; name: string }[] = [];
+    const holidaysHit: { date: Date; name: string; isHoliday: boolean }[] = [];
     let dayCount = 1;
 
     // Safety limit of 365 days max calculation
     let iterations = 0;
     while (accum < goalHours && iterations < 365) {
       if (selectedDays.includes(current.getDay())) {
-        const holiday = holidaysMap.get(toISODate(current));
+        const iso = toISODate(current);
+        const holiday = holidaysMap.get(iso);
+        const extraSkip = extraSkipMap.get(iso);
         if (holiday) {
-          holidaysHit.push({ date: new Date(current), name: holiday.name });
+          holidaysHit.push({ date: new Date(current), name: holiday.name, isHoliday: true });
+        } else if (extraSkip) {
+          holidaysHit.push({ date: new Date(current), name: extraSkip, isHoliday: false });
         } else {
           const needed = goalHours - accum;
           const hoursToday = Math.min(hoursPerDay, needed);
@@ -93,7 +115,7 @@ export const PredictionArea: React.FC = () => {
       iterations++;
     }
     return { timeline: result, skippedHolidays: holidaysHit };
-  }, [goalHours, completedHours, hoursPerDay, startDate, selectedDays, holidaysMap]);
+  }, [goalHours, completedHours, hoursPerDay, startDate, selectedDays, holidaysMap, extraSkipMap]);
 
   const lastDay = timeline.length > 0 ? timeline[timeline.length - 1] : null;
   const calendarDays = lastDay 
@@ -395,7 +417,7 @@ export const PredictionArea: React.FC = () => {
                   {skippedHolidays.length > 0 && (
                     <div className="mt-6">
                       <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">
-                        Feriados desconsiderados na contagem ({skippedHolidays.length})
+                        Dias desconsiderados na contagem ({skippedHolidays.length})
                       </div>
                       <div className="space-y-2">
                         {skippedHolidays.map((h, idx) => (
@@ -412,7 +434,7 @@ export const PredictionArea: React.FC = () => {
                                 <div className="text-xs text-amber-700">{h.name}</div>
                               </div>
                             </div>
-                            <span className="text-[10px] font-bold uppercase text-amber-500 shrink-0">Feriado</span>
+                            <span className="text-[10px] font-bold uppercase text-amber-500 shrink-0">{h.isHoliday ? 'Feriado' : 'Sem aula'}</span>
                           </div>
                         ))}
                       </div>

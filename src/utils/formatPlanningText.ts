@@ -1,5 +1,5 @@
 // Reformata um texto de planejamento colado em markdown, seguindo o mesmo estilo
-// usado no plano de 18/08 (src/data/classPlanning.ts): cabeçalho em **Chave:** valor,
+// usado no plano de 19/08 (src/data/classPlanning.ts): cabeçalho em **Chave:** valor,
 // seções numeradas como "## N. Título" e etapas como "### Etapa N — Título".
 function formatBlock(block: string): string {
   const lines = block.split('\n');
