@@ -571,7 +571,7 @@ export default function App() {
     syncToGoogleDocs(entries);
   }, [entries, settings.autoSyncEnabled, accessToken, user]);
 
-  const handleGenerateScheduleDoc = async (rows: { date: string; content: string }[]) => {
+  const handleGenerateScheduleDoc = async (payload: { title: string; headers: string[]; rows: string[][] }) => {
     if (!user) {
       alert("Faça login para gerar o documento no Google Docs.");
       return;
@@ -596,7 +596,7 @@ export default function App() {
         return;
       }
 
-      const title = 'Cronos Estágio - Cronograma de Aulas';
+      const title = payload.title;
       let docId = await GoogleDocsService.findDocByTitle(token, title);
       if (!docId) {
         docId = await GoogleDocsService.createDoc(token, title);
@@ -606,7 +606,7 @@ export default function App() {
         throw new Error('Não foi possível criar ou localizar o Google Docs.');
       }
 
-      await GoogleDocsService.createScheduleTableDoc(token, docId, rows);
+      await GoogleDocsService.createScheduleTableDoc(token, docId, payload.headers, payload.rows);
 
       const googleDocUrl = `https://docs.google.com/document/d/${docId}/edit`;
       if (docsTab && !docsTab.closed) {

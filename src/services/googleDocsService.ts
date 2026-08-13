@@ -141,16 +141,17 @@ export const appendToDoc = async (accessToken: string, docId: string, content: {
 };
 
 /**
- * Replaces the doc content with a two-column table (Data / Conteúdo) built
- * from the given rows. Used to export the class schedule to Google Docs.
+ * Replaces the doc content with a table built from the given headers/rows.
+ * Used to export the class schedule (Geral / Interpretação de Texto / Redação) to Google Docs.
  */
 export const createScheduleTableDoc = async (
   accessToken: string,
   docId: string,
-  rows: { date: string; content?: string }[]
+  headers: string[],
+  rows: string[][]
 ) => {
   const numRows = rows.length + 1; // + header row
-  const numCols = 2;
+  const numCols = headers.length;
 
   const docResponse = await fetch(`${DOCS_API_BASE}/${docId}`, {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -200,7 +201,7 @@ export const createScheduleTableDoc = async (
     throw new Error('Tabela não encontrada no documento após a inserção.');
   }
 
-  const cellTexts = [['Data', 'Conteúdo'], ...rows.map(r => [r.date, r.content || ''])];
+  const cellTexts = [headers, ...rows];
 
   const insertRequests: { index: number; text: string }[] = [];
   table.tableRows.forEach((tableRow: any, rowIdx: number) => {

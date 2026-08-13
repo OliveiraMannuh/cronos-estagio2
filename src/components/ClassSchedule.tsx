@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Calendar as CalendarIcon, Loader2, FileText } from 'lucide-react';
 
 interface ClassScheduleProps {
-  onGenerateDoc: (rows: { date: string; content: string }[]) => void;
+  onGenerateDoc: (payload: { title: string; headers: string[]; rows: string[][] }) => void;
   isGeneratingDoc: boolean;
 }
 
@@ -294,32 +294,31 @@ export const ClassSchedule: React.FC<ClassScheduleProps> = ({ onGenerateDoc, isG
   const [subject, setSubject] = useState<Subject>('geral');
 
   const handleGenerate = () => {
-    let rows: { date: string; content: string }[] = [];
-
     if (subject === 'interpretacao') {
-      rows = WEEKS_INTERPRETACAO.flatMap(week =>
-        week.sessions.map(s => ({
-          date: s.date,
-          content: s.noClass ? s.content : `${s.content} — Foco Enceja/Enem: ${s.foco}`,
-        }))
-      );
+      onGenerateDoc({
+        title: 'Cronos Estágio - Cronograma de Aulas (Interpretação de Texto)',
+        headers: ['Data', 'Dia', 'Conteúdo', 'Foco Enceja/Enem'],
+        rows: WEEKS_INTERPRETACAO.flatMap(week =>
+          week.sessions.map(s => [s.date, s.day, s.content, s.noClass ? '—' : s.foco])
+        ),
+      });
     } else if (subject === 'redacao') {
-      rows = WEEKS_REDACAO.flatMap(week =>
-        week.sessions.map(s => ({
-          date: s.date,
-          content: s.noClass ? s.content : `${s.content} — Foco Enceja/Enem: ${s.foco}`,
-        }))
-      );
+      onGenerateDoc({
+        title: 'Cronos Estágio - Cronograma de Aulas (Redação)',
+        headers: ['Data', 'Dia', 'Conteúdo', 'Conexão com Interpretação', 'Foco Enceja/Enem'],
+        rows: WEEKS_REDACAO.flatMap(week =>
+          week.sessions.map(s => [s.date, s.day, s.content, s.noClass ? '—' : s.conexao, s.noClass ? '—' : s.foco])
+        ),
+      });
     } else {
-      rows = WEEKS_GERAL.flatMap(week =>
-        week.sessions.map(s => ({
-          date: s.date,
-          content: s.noClass ? s.interpretacao : `Interpretação de Texto: ${s.interpretacao} | Redação: ${s.redacao}`,
-        }))
-      );
+      onGenerateDoc({
+        title: 'Cronos Estágio - Cronograma de Aulas (Geral)',
+        headers: ['Data', 'Dia', 'Interpretação de Texto', 'Redação'],
+        rows: WEEKS_GERAL.flatMap(week =>
+          week.sessions.map(s => [s.date, s.day, s.interpretacao, s.redacao])
+        ),
+      });
     }
-
-    onGenerateDoc(rows);
   };
 
   const title =
