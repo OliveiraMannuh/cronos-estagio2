@@ -10,8 +10,8 @@ export interface PlanningLesson {
 
 export const PLANNING_LESSONS: PlanningLesson[] = [
   {
-    date: '19/08',
-    day: 'Quarta',
+    date: '21/08',
+    day: 'Sexta',
     subject: 'interpretacao',
     title: 'Leitura x interpretação: decodificar, compreender e inferir',
     markdown: `**Tema:** Leitura x interpretação: decodificar, compreender e inferir

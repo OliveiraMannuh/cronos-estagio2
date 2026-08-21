@@ -3,10 +3,9 @@ export interface ScheduleDate {
   day: string;
 }
 
-// Datas letivas do cronograma (19/08 a 13/11), excluindo os dias sem aula.
+// Datas letivas do cronograma (21/08 a 17/11), excluindo os dias sem aula.
 // Mantido em sincronia manualmente com as datas de WEEKS_INTERPRETACAO/WEEKS_REDACAO em ClassSchedule.tsx.
 export const SCHEDULE_DATES: ScheduleDate[] = [
-  { date: '19/08', day: 'Quarta' },
   { date: '21/08', day: 'Sexta' },
   { date: '25/08', day: 'Terça' },
   { date: '26/08', day: 'Quarta' },
@@ -42,6 +41,7 @@ export const SCHEDULE_DATES: ScheduleDate[] = [
   { date: '10/11', day: 'Terça' },
   { date: '11/11', day: 'Quarta' },
   { date: '13/11', day: 'Sexta' },
+  { date: '17/11', day: 'Terça' },
 ];
 
 export function scheduleDateSortKey(date: string): number {
