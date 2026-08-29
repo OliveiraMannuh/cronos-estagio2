@@ -34,7 +34,7 @@ export const PredictionArea: React.FC = () => {
   const [goalHours, setGoalHours] = useState<number>(72);
   const [completedHours, setCompletedHours] = useState<number>(0);
   const [hoursPerDay, setHoursPerDay] = useState<number>(2);
-  const [startDate, setStartDate] = useState<string>('2026-08-19');
+  const [startDate, setStartDate] = useState<string>('2026-08-21');
   const [selectedDays, setSelectedDays] = useState<number[]>([2, 3, 5]); // Ter-Qua-Sex
   const [activeTab, setActiveTab] = useState<'schedule' | 'analysis'>('schedule');
 
@@ -54,7 +54,7 @@ export const PredictionArea: React.FC = () => {
     setGoalHours(72);
     setCompletedHours(0);
     setHoursPerDay(2);
-    setStartDate('2026-08-19');
+    setStartDate('2026-08-21');
     setSelectedDays([2, 3, 5]);
   };
 
