@@ -35,79 +35,79 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
     title: 'Semana 1',
     sessions: [
       { date: '21/08', day: 'Sexta', content: 'Leitura x interpretação: decodificar, compreender e inferir', foco: 'Inferência básica, leitura literal x inferencial' },
-      { date: '25/08', day: 'Terça', content: 'Gêneros textuais I — textos do cotidiano (notícia, anúncio, receita, bula)', foco: 'Reconhecimento de gênero e finalidade comunicativa' },
+      { date: '25/08', day: 'Terça', content: 'Revisão — Leitura x interpretação: decodificar, compreender e inferir', foco: 'Retomada do conteúdo da aula anterior, em função da apresentação do projeto "O dia da beleza e identidade"' },
     ],
   },
   {
     title: 'Semana 2',
     sessions: [
-      { date: '26/08', day: 'Quarta', content: 'Gêneros textuais II — narrar, descrever, dissertar', foco: 'Estrutura e propósito de tipos textuais' },
-      { date: '28/08', day: 'Sexta', content: 'Fato x Opinião', foco: 'F7 – Analisar criticamente os diferentes discursos, inclusive o próprio, desenvolvendo a capacidade de avaliação de textos' },
-      { date: '01/09', day: 'Terça', content: 'Tema, ideia central e ideias secundárias', foco: 'Identificação da ideia principal — item clássico de prova' },
+      { date: '26/08', day: 'Quarta', content: 'Gêneros textuais I — textos do cotidiano (notícia, anúncio, receita, bula)', foco: 'Reconhecimento de gênero e finalidade comunicativa' },
+      { date: '28/08', day: 'Sexta', content: 'Gêneros textuais II — narrar, descrever, dissertar', foco: 'Estrutura e propósito de tipos textuais' },
+      { date: '01/09', day: 'Terça', content: 'Fato x Opinião', foco: 'F7 – Analisar criticamente os diferentes discursos, inclusive o próprio, desenvolvendo a capacidade de avaliação de textos' },
     ],
   },
   {
     title: 'Semana 3',
     sessions: [
-      { date: '02/09', day: 'Quarta', content: 'Estrutura do parágrafo e tópico frasal', foco: 'Localização da tese/ideia-núcleo do parágrafo' },
-      { date: '04/09', day: 'Sexta', content: 'Coesão textual I — referenciação (pronomes, elipse)', foco: 'Retomada de termos, coesão referencial' },
-      { date: '08/09', day: 'Terça', content: 'Coesão textual II — conectivos (causa, consequência, oposição, adição)', foco: 'Relações lógico-discursivas entre orações' },
+      { date: '02/09', day: 'Quarta', content: 'Tema, ideia central e ideias secundárias', foco: 'Identificação da ideia principal — item clássico de prova' },
+      { date: '04/09', day: 'Sexta', content: 'Estrutura do parágrafo e tópico frasal', foco: 'Localização da tese/ideia-núcleo do parágrafo' },
+      { date: '08/09', day: 'Terça', content: 'Coesão textual I — referenciação (pronomes, elipse)', foco: 'Retomada de termos, coesão referencial' },
     ],
   },
   {
     title: 'Semana 4',
     sessions: [
-      { date: '09/09', day: 'Quarta', content: 'Coerência textual — relação entre as partes do texto', foco: 'Continuidade de sentido, não contradição' },
-      { date: '11/09', day: 'Sexta', content: 'Progressão temática e paráfrase', foco: 'Reconhecer reescrita mantendo o sentido' },
-      { date: '15/09', day: 'Terça', content: 'Prática dirigida — questões de coesão e coerência (banco Enceja/Enem)', foco: 'Simulado temático' },
+      { date: '09/09', day: 'Quarta', content: 'Coesão textual II — conectivos (causa, consequência, oposição, adição)', foco: 'Relações lógico-discursivas entre orações' },
+      { date: '11/09', day: 'Sexta', content: 'Coerência textual — relação entre as partes do texto', foco: 'Continuidade de sentido, não contradição' },
+      { date: '15/09', day: 'Terça', content: 'Progressão temática e paráfrase', foco: 'Reconhecer reescrita mantendo o sentido' },
     ],
   },
   {
     title: 'Semana 5',
     sessions: [
-      { date: '16/09', day: 'Quarta', content: 'Semântica lexical I — denotação e conotação', foco: 'Sentido literal x figurado' },
-      { date: '18/09', day: 'Sexta', content: 'Semântica lexical II — polissemia e ambiguidade lexical', foco: 'Palavras com múltiplos sentidos no contexto' },
-      { date: '22/09', day: 'Terça', content: 'Sinonímia, antonímia e campo semântico', foco: 'Substituição de termos sem perda de sentido' },
+      { date: '16/09', day: 'Quarta', content: 'Prática dirigida — questões de coesão e coerência (banco Enceja/Enem)', foco: 'Simulado temático' },
+      { date: '18/09', day: 'Sexta', content: 'Semântica lexical I — denotação e conotação', foco: 'Sentido literal x figurado' },
+      { date: '22/09', day: 'Terça', content: 'Semântica lexical II — polissemia e ambiguidade lexical', foco: 'Palavras com múltiplos sentidos no contexto' },
     ],
   },
   {
     title: 'Semana 6',
     sessions: [
-      { date: '23/09', day: 'Quarta', content: 'Figuras de linguagem I — metáfora e metonímia', foco: 'Leitura de sentido figurado em textos literários e publicitários' },
-      { date: '25/09', day: 'Sexta', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
-      { date: '29/09', day: 'Terça', content: 'Prática — figuras de linguagem em anúncios, poemas e tirinhas', foco: 'Simulado temático' },
+      { date: '23/09', day: 'Quarta', content: 'Sinonímia, antonímia e campo semântico', foco: 'Substituição de termos sem perda de sentido' },
+      { date: '25/09', day: 'Sexta', content: 'Figuras de linguagem I — metáfora e metonímia', foco: 'Leitura de sentido figurado em textos literários e publicitários' },
+      { date: '29/09', day: 'Terça', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
     ],
   },
   {
     title: 'Semana 7',
     sessions: [
-      { date: '30/09', day: 'Quarta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
-      { date: '02/10', day: 'Sexta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
-      { date: '06/10', day: 'Terça', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
+      { date: '30/09', day: 'Quarta', content: 'Prática — figuras de linguagem em anúncios, poemas e tirinhas', foco: 'Simulado temático' },
+      { date: '02/10', day: 'Sexta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
+      { date: '06/10', day: 'Terça', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
     ],
   },
   {
     title: 'Semana 8',
     sessions: [
-      { date: '07/10', day: 'Quarta', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
-      { date: '09/10', day: 'Sexta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
-      { date: '13/10', day: 'Terça', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
+      { date: '07/10', day: 'Quarta', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
+      { date: '09/10', day: 'Sexta', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
+      { date: '13/10', day: 'Terça', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
     ],
   },
   {
     title: 'Semana 9',
     sessions: [
-      { date: '14/10', day: 'Quarta', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '14/10', day: 'Quarta', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
       { date: '16/10', day: 'Sexta', content: '(sem aula)', foco: '—', noClass: true },
-      { date: '20/10', day: 'Terça', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
+      { date: '20/10', day: 'Terça', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
-      { date: '23/10', day: 'Sexta', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
-      { date: '27/10', day: 'Terça', content: 'Prática — interpretação de humor e duplo sentido', foco: 'Simulado temático' },
+      { date: '21/10', day: 'Quarta', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
+      { date: '23/10', day: 'Sexta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
+      { date: '27/10', day: 'Terça', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
     ],
   },
   {
