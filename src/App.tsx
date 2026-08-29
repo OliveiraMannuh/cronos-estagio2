@@ -58,7 +58,7 @@ import {
 } from 'firebase/firestore';
 import * as GoogleDocsService from './services/googleDocsService';
 
-const GOAL_HOURS = 36;
+const GOAL_HOURS = 72;
 const GOAL_MINUTES = GOAL_HOURS * 60;
 
 enum OperationType {
