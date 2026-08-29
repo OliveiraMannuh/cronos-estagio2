@@ -42,7 +42,7 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
     title: 'Semana 2',
     sessions: [
       { date: '26/08', day: 'Quarta', content: 'Gêneros textuais II — narrar, descrever, dissertar', foco: 'Estrutura e propósito de tipos textuais' },
-      { date: '28/08', day: 'Sexta', content: 'Suporte e esfera de circulação do texto', foco: 'Como o veículo (jornal, rede social, livro) afeta o sentido' },
+      { date: '28/08', day: 'Sexta', content: 'Fato x Opinião', foco: 'F7 – Analisar criticamente os diferentes discursos, inclusive o próprio, desenvolvendo a capacidade de avaliação de textos' },
       { date: '01/09', day: 'Terça', content: 'Tema, ideia central e ideias secundárias', foco: 'Identificação da ideia principal — item clássico de prova' },
     ],
   },
