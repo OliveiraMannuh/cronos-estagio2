@@ -806,7 +806,7 @@ export default function App() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <PredictionArea />
+                  <PredictionArea realCompletedHours={stats.totalMinutes / 60} />
                 </motion.div>
               ) : dashboardTab === 'aulas' ? (
                 <motion.div

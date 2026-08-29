@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   Calendar as CalendarIcon, 
   Clock, 
@@ -30,13 +30,22 @@ const WEEKDAYS = [
   { id: 0, label: 'Dom', name: 'Domingo' },
 ];
 
-export const PredictionArea: React.FC = () => {
+interface PredictionAreaProps {
+  realCompletedHours: number;
+}
+
+export const PredictionArea: React.FC<PredictionAreaProps> = ({ realCompletedHours }) => {
   const [goalHours, setGoalHours] = useState<number>(72);
-  const [completedHours, setCompletedHours] = useState<number>(0);
+  const [completedHours, setCompletedHours] = useState<number>(realCompletedHours);
   const [hoursPerDay, setHoursPerDay] = useState<number>(2);
   const [startDate, setStartDate] = useState<string>('2026-08-21');
   const [selectedDays, setSelectedDays] = useState<number[]>([2, 3, 5]); // Ter-Qua-Sex
   const [activeTab, setActiveTab] = useState<'schedule' | 'analysis'>('schedule');
+
+  // Mantém "Horas Concluídas" em sincronia com os registros reais da aba Registros
+  useEffect(() => {
+    setCompletedHours(realCompletedHours);
+  }, [realCompletedHours]);
 
   const toggleDay = (dayId: number) => {
     setSelectedDays(prev => 
@@ -52,7 +61,7 @@ export const PredictionArea: React.FC = () => {
   
   const resetParams = () => {
     setGoalHours(72);
-    setCompletedHours(0);
+    setCompletedHours(realCompletedHours);
     setHoursPerDay(2);
     setStartDate('2026-08-21');
     setSelectedDays([2, 3, 5]);
