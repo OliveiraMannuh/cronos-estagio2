@@ -15,8 +15,9 @@ import { motion } from 'motion/react';
 import { getHolidaysInRange, toISODate } from '../utils/holidays';
 
 // Dias sem aula que não são feriados oficiais, mas já estão previstos no cronograma
-// (ex.: 16/10, provável dia "imprensado" entre aulas — ver ClassSchedule.tsx).
+// (ex.: 04/09 formação e 16/10, provável dia "imprensado" entre aulas — ver ClassSchedule.tsx).
 const EXTRA_NON_CLASS_DAYS: { month: number; day: number; name: string }[] = [
+  { month: 9, day: 4, name: 'Formação Selo Escola Antirracista' },
   { month: 10, day: 16, name: 'Dia sem aula (previsto)' },
 ];
 

@@ -50,94 +50,101 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
     title: 'Semana 3',
     sessions: [
       { date: '02/09', day: 'Quarta', content: 'Tema, ideia central e ideias secundárias', foco: 'Identificação da ideia principal — item clássico de prova' },
-      { date: '04/09', day: 'Sexta', content: 'Estrutura do parágrafo e tópico frasal', foco: 'Localização da tese/ideia-núcleo do parágrafo' },
-      { date: '08/09', day: 'Terça', content: 'Coesão textual I — referenciação (pronomes, elipse)', foco: 'Retomada de termos, coesão referencial' },
+      { date: '04/09', day: 'Sexta', content: '(sem aula — formação Selo Escola Antirracista)', foco: '—', noClass: true },
+      { date: '08/09', day: 'Terça', content: 'Estrutura do parágrafo e tópico frasal', foco: 'Localização da tese/ideia-núcleo do parágrafo' },
     ],
   },
   {
     title: 'Semana 4',
     sessions: [
-      { date: '09/09', day: 'Quarta', content: 'Coesão textual II — conectivos (causa, consequência, oposição, adição)', foco: 'Relações lógico-discursivas entre orações' },
-      { date: '11/09', day: 'Sexta', content: 'Coerência textual — relação entre as partes do texto', foco: 'Continuidade de sentido, não contradição' },
-      { date: '15/09', day: 'Terça', content: 'Progressão temática e paráfrase', foco: 'Reconhecer reescrita mantendo o sentido' },
+      { date: '09/09', day: 'Quarta', content: 'Coesão textual I — referenciação (pronomes, elipse)', foco: 'Retomada de termos, coesão referencial' },
+      { date: '11/09', day: 'Sexta', content: 'Coesão textual II — conectivos (causa, consequência, oposição, adição)', foco: 'Relações lógico-discursivas entre orações' },
+      { date: '15/09', day: 'Terça', content: 'Coerência textual — relação entre as partes do texto', foco: 'Continuidade de sentido, não contradição' },
     ],
   },
   {
     title: 'Semana 5',
     sessions: [
-      { date: '16/09', day: 'Quarta', content: 'Prática dirigida — questões de coesão e coerência (banco Enceja/Enem)', foco: 'Simulado temático' },
-      { date: '18/09', day: 'Sexta', content: 'Semântica lexical I — denotação e conotação', foco: 'Sentido literal x figurado' },
-      { date: '22/09', day: 'Terça', content: 'Semântica lexical II — polissemia e ambiguidade lexical', foco: 'Palavras com múltiplos sentidos no contexto' },
+      { date: '16/09', day: 'Quarta', content: 'Progressão temática e paráfrase', foco: 'Reconhecer reescrita mantendo o sentido' },
+      { date: '18/09', day: 'Sexta', content: 'Prática dirigida — questões de coesão e coerência (banco Enceja/Enem)', foco: 'Simulado temático' },
+      { date: '22/09', day: 'Terça', content: 'Semântica lexical I — denotação e conotação', foco: 'Sentido literal x figurado' },
     ],
   },
   {
     title: 'Semana 6',
     sessions: [
-      { date: '23/09', day: 'Quarta', content: 'Sinonímia, antonímia e campo semântico', foco: 'Substituição de termos sem perda de sentido' },
-      { date: '25/09', day: 'Sexta', content: 'Figuras de linguagem I — metáfora e metonímia', foco: 'Leitura de sentido figurado em textos literários e publicitários' },
-      { date: '29/09', day: 'Terça', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
+      { date: '23/09', day: 'Quarta', content: 'Semântica lexical II — polissemia e ambiguidade lexical', foco: 'Palavras com múltiplos sentidos no contexto' },
+      { date: '25/09', day: 'Sexta', content: 'Sinonímia, antonímia e campo semântico', foco: 'Substituição de termos sem perda de sentido' },
+      { date: '29/09', day: 'Terça', content: 'Figuras de linguagem I — metáfora e metonímia', foco: 'Leitura de sentido figurado em textos literários e publicitários' },
     ],
   },
   {
     title: 'Semana 7',
     sessions: [
-      { date: '30/09', day: 'Quarta', content: 'Prática — figuras de linguagem em anúncios, poemas e tirinhas', foco: 'Simulado temático' },
-      { date: '02/10', day: 'Sexta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
-      { date: '06/10', day: 'Terça', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
+      { date: '30/09', day: 'Quarta', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
+      { date: '02/10', day: 'Sexta', content: 'Prática — figuras de linguagem em anúncios, poemas e tirinhas', foco: 'Simulado temático' },
+      { date: '06/10', day: 'Terça', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
     ],
   },
   {
     title: 'Semana 8',
     sessions: [
-      { date: '07/10', day: 'Quarta', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
-      { date: '09/10', day: 'Sexta', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
-      { date: '13/10', day: 'Terça', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '07/10', day: 'Quarta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
+      { date: '09/10', day: 'Sexta', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
+      { date: '13/10', day: 'Terça', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
     ],
   },
   {
     title: 'Semana 9',
     sessions: [
-      { date: '14/10', day: 'Quarta', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
+      { date: '14/10', day: 'Quarta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
       { date: '16/10', day: 'Sexta', content: '(sem aula)', foco: '—', noClass: true },
-      { date: '20/10', day: 'Terça', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '20/10', day: 'Terça', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
-      { date: '23/10', day: 'Sexta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
-      { date: '27/10', day: 'Terça', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
+      { date: '21/10', day: 'Quarta', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '23/10', day: 'Sexta', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
+      { date: '27/10', day: 'Terça', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
     ],
   },
   {
     title: 'Semana 11',
     sessions: [
       { date: '28/10', day: 'Quarta', content: '(sem aula — feriado)', foco: '—', noClass: true },
-      { date: '30/10', day: 'Sexta', content: 'Argumentação I — tipos de argumento e estratégias persuasivas', foco: 'Base para a redação e para textos de opinião' },
-      { date: '03/11', day: 'Terça', content: 'Argumentação II — identificar tese e argumentos em texto dissertativo', foco: 'Leitura de artigos de opinião/editoriais' },
+      { date: '30/10', day: 'Sexta', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
+      { date: '03/11', day: 'Terça', content: 'Argumentação I — tipos de argumento e estratégias persuasivas', foco: 'Base para a redação e para textos de opinião' },
     ],
   },
   {
     title: 'Semana 12',
     sessions: [
-      { date: '04/11', day: 'Quarta', content: 'Texto verbal e não verbal — leitura de imagens', foco: 'Interpretação de linguagem não verbal, frequente no Enem' },
-      { date: '06/11', day: 'Sexta', content: 'Leitura de gráficos, tabelas e infográficos', foco: 'Interpretação de dados estatísticos, comum em questões de Enceja/Enem' },
-      { date: '10/11', day: 'Terça', content: 'Multimodalidade — textos que unem verbal e visual (memes, propagandas, charges)', foco: 'Leitura integrada de múltiplas linguagens' },
+      { date: '04/11', day: 'Quarta', content: 'Argumentação II — identificar tese e argumentos em texto dissertativo', foco: 'Leitura de artigos de opinião/editoriais' },
+      { date: '06/11', day: 'Sexta', content: 'Texto verbal e não verbal — leitura de imagens', foco: 'Interpretação de linguagem não verbal, frequente no Enem' },
+      { date: '10/11', day: 'Terça', content: 'Leitura de gráficos, tabelas e infográficos', foco: 'Interpretação de dados estatísticos, comum em questões de Enceja/Enem' },
     ],
   },
   {
     title: 'Semana 13',
     sessions: [
-      { date: '11/11', day: 'Quarta', content: 'Simulado geral — bloco de questões estilo Enceja/Enem', foco: 'Avaliação formativa' },
-      { date: '13/11', day: 'Sexta', content: 'Correção comentada do simulado', foco: 'Retomada dos pontos de maior erro da turma' },
-      { date: '17/11', day: 'Terça', content: 'Revisão geral e encerramento — tira-dúvidas finais', foco: 'Fechamento do conteúdo' },
+      { date: '11/11', day: 'Quarta', content: 'Multimodalidade — textos que unem verbal e visual (memes, propagandas, charges)', foco: 'Leitura integrada de múltiplas linguagens' },
+      { date: '13/11', day: 'Sexta', content: 'Simulado geral — bloco de questões estilo Enceja/Enem', foco: 'Avaliação formativa' },
+      { date: '17/11', day: 'Terça', content: 'Correção comentada do simulado', foco: 'Retomada dos pontos de maior erro da turma' },
+    ],
+  },
+  {
+    title: 'Semana 14',
+    sessions: [
+      { date: '18/11', day: 'Quarta', content: 'Revisão geral e encerramento — tira-dúvidas finais', foco: 'Fechamento do conteúdo' },
     ],
   },
 ];
 
 const OBSERVACOES_INTERPRETACAO = [
-  'Os dias marcados com "?" no calendário original (16/10 e 28/10) foram tratados como sem aula — 28/10 também é feriado (Dia do Servidor Público).',
+  'Não haverá aula em 04/09 devido à formação para o Selo Escola Antirracista. O conteúdo dessa data foi remanejado (não removido), empurrando cada aula seguinte para o próximo dia de aula (ter/qua/sex) e acrescentando um novo encontro em 18/11 ao final do cronograma para acomodar o conteúdo que sobrou.',
+  'Os dias marcados com "?" no calendário original (16/10 e 28/10) continuam sem aula — 28/10 também é feriado (Dia do Servidor Público).',
   'Como o primeiro dia deixou de ser diagnóstico, um novo conteúdo (leitura de gráficos e tabelas) foi incluído no bloco de multimodalidade para preencher o 36º encontro.',
   'A sequência pode ser ajustada conforme o ritmo da turma — os blocos de "prática/simulado" são bons pontos de flexibilidade caso precise reforçar algum tema.',
   'Sugestão de fontes de texto motivador: notícias atuais, tirinhas (Mafalda, Armandinho), letras de música, propagandas antigas e recentes, e provas anteriores do Enceja/Enem para ambientar a turma ao formato de prova.',
@@ -163,99 +170,107 @@ const WEEKS_REDACAO: Week<RedacaoSession>[] = [
     title: 'Semana 3',
     sessions: [
       { date: '02/09', day: 'Quarta', content: 'Planejamento textual: rascunho e esqueleto argumentativo', conexao: 'Tema, ideia central e secundárias', foco: 'Organização antes da escrita (Competência 3)' },
-      { date: '04/09', day: 'Sexta', content: 'O parágrafo dissertativo: tópico frasal e unidade temática', conexao: 'Estrutura do parágrafo e tópico frasal', foco: 'Competência 3 — projeto de texto' },
-      { date: '08/09', day: 'Terça', content: 'Coesão na escrita I — referenciação e retomada de termos', conexao: 'Coesão textual I', foco: 'Competência 4' },
+      { date: '04/09', day: 'Sexta', content: '(sem aula — formação Selo Escola Antirracista)', conexao: '—', foco: '—', noClass: true },
+      { date: '08/09', day: 'Terça', content: 'O parágrafo dissertativo: tópico frasal e unidade temática', conexao: 'Estrutura do parágrafo e tópico frasal', foco: 'Competência 3 — projeto de texto' },
     ],
   },
   {
     title: 'Semana 4',
     sessions: [
-      { date: '09/09', day: 'Quarta', content: 'Coesão na escrita II — conectivos e operadores argumentativos', conexao: 'Coesão textual II', foco: 'Competência 4' },
-      { date: '11/09', day: 'Sexta', content: 'Coerência na produção textual — evitando contradições e saltos lógicos', conexao: 'Coerência textual', foco: 'Competência 4' },
-      { date: '15/09', day: 'Terça', content: 'Progressão de ideias sem repetição — uso da paráfrase na escrita', conexao: 'Progressão temática e paráfrase', foco: 'Evitar redundância no texto' },
+      { date: '09/09', day: 'Quarta', content: 'Coesão na escrita I — referenciação e retomada de termos', conexao: 'Coesão textual I', foco: 'Competência 4' },
+      { date: '11/09', day: 'Sexta', content: 'Coesão na escrita II — conectivos e operadores argumentativos', conexao: 'Coesão textual II', foco: 'Competência 4' },
+      { date: '15/09', day: 'Terça', content: 'Coerência na produção textual — evitando contradições e saltos lógicos', conexao: 'Coerência textual', foco: 'Competência 4' },
     ],
   },
   {
     title: 'Semana 5',
     sessions: [
-      { date: '16/09', day: 'Quarta', content: 'Prática — produção do parágrafo de introdução', conexao: 'Prática coesão/coerência', foco: 'Aplicação prática' },
-      { date: '18/09', day: 'Sexta', content: 'Precisão vocabular — denotação, conotação e escolha lexical', conexao: 'Semântica lexical I', foco: 'Competência 1 (domínio da norma culta)' },
-      { date: '22/09', day: 'Terça', content: 'Evitando ambiguidade na escrita', conexao: 'Semântica lexical II', foco: 'Clareza como critério de correção' },
+      { date: '16/09', day: 'Quarta', content: 'Progressão de ideias sem repetição — uso da paráfrase na escrita', conexao: 'Progressão temática e paráfrase', foco: 'Evitar redundância no texto' },
+      { date: '18/09', day: 'Sexta', content: 'Prática — produção do parágrafo de introdução', conexao: 'Prática coesão/coerência', foco: 'Aplicação prática' },
+      { date: '22/09', day: 'Terça', content: 'Precisão vocabular — denotação, conotação e escolha lexical', conexao: 'Semântica lexical I', foco: 'Competência 1 (domínio da norma culta)' },
     ],
   },
   {
     title: 'Semana 6',
     sessions: [
-      { date: '23/09', day: 'Quarta', content: 'Variedade lexical — sinônimos e evitando repetição de palavras', conexao: 'Sinonímia, antonímia e campo semântico', foco: 'Riqueza vocabular (Competência 1)' },
-      { date: '25/09', day: 'Sexta', content: 'Uso comedido de linguagem figurada na argumentação', conexao: 'Figuras de linguagem I', foco: 'Evitar excesso de subjetividade no texto argumentativo' },
-      { date: '29/09', day: 'Terça', content: 'Tipos de argumento I — autoridade e exemplificação', conexao: 'Figuras de linguagem II', foco: 'Competência 3 — estratégias argumentativas' },
+      { date: '23/09', day: 'Quarta', content: 'Evitando ambiguidade na escrita', conexao: 'Semântica lexical II', foco: 'Clareza como critério de correção' },
+      { date: '25/09', day: 'Sexta', content: 'Variedade lexical — sinônimos e evitando repetição de palavras', conexao: 'Sinonímia, antonímia e campo semântico', foco: 'Riqueza vocabular (Competência 1)' },
+      { date: '29/09', day: 'Terça', content: 'Uso comedido de linguagem figurada na argumentação', conexao: 'Figuras de linguagem I', foco: 'Evitar excesso de subjetividade no texto argumentativo' },
     ],
   },
   {
     title: 'Semana 7',
     sessions: [
-      { date: '30/09', day: 'Quarta', content: 'Prática — parágrafo de desenvolvimento com argumento de exemplificação', conexao: 'Prática figuras de linguagem', foco: 'Aplicação prática' },
-      { date: '02/10', day: 'Sexta', content: 'Adequação da linguagem à norma padrão (registro formal)', conexao: 'Funções da linguagem I', foco: 'Competência 1' },
-      { date: '06/10', day: 'Terça', content: 'Tipos de argumento II — causa/consequência e comparação', conexao: 'Funções da linguagem II', foco: 'Competência 3' },
+      { date: '30/09', day: 'Quarta', content: 'Tipos de argumento I — autoridade e exemplificação', conexao: 'Figuras de linguagem II', foco: 'Competência 3 — estratégias argumentativas' },
+      { date: '02/10', day: 'Sexta', content: 'Prática — parágrafo de desenvolvimento com argumento de exemplificação', conexao: 'Prática figuras de linguagem', foco: 'Aplicação prática' },
+      { date: '06/10', day: 'Terça', content: 'Adequação da linguagem à norma padrão (registro formal)', conexao: 'Funções da linguagem I', foco: 'Competência 1' },
     ],
   },
   {
     title: 'Semana 8',
     sessions: [
-      { date: '07/10', day: 'Quarta', content: 'Prática — parágrafo de desenvolvimento com causa/consequência', conexao: 'Prática funções da linguagem', foco: 'Aplicação prática' },
-      { date: '09/10', day: 'Sexta', content: 'Repertório sociocultural I — o que é e por que "decorar frases prontas" não funciona', conexao: 'Intertextualidade I', foco: 'Competência 2' },
-      { date: '13/10', day: 'Terça', content: 'Repertório sociocultural II — como inserir citação/dado sem parecer forçado', conexao: 'Intertextualidade II', foco: 'Competência 2' },
+      { date: '07/10', day: 'Quarta', content: 'Tipos de argumento II — causa/consequência e comparação', conexao: 'Funções da linguagem II', foco: 'Competência 3' },
+      { date: '09/10', day: 'Sexta', content: 'Prática — parágrafo de desenvolvimento com causa/consequência', conexao: 'Prática funções da linguagem', foco: 'Aplicação prática' },
+      { date: '13/10', day: 'Terça', content: 'Repertório sociocultural I — o que é e por que "decorar frases prontas" não funciona', conexao: 'Intertextualidade I', foco: 'Competência 2' },
     ],
   },
   {
     title: 'Semana 9',
     sessions: [
-      { date: '14/10', day: 'Quarta', content: 'Prática — parágrafo usando repertório legitimado', conexao: 'Prática intertextualidade', foco: 'Aplicação prática' },
+      { date: '14/10', day: 'Quarta', content: 'Repertório sociocultural II — como inserir citação/dado sem parecer forçado', conexao: 'Intertextualidade II', foco: 'Competência 2' },
       { date: '16/10', day: 'Sexta', content: '(sem aula)', conexao: '—', foco: '—', noClass: true },
-      { date: '20/10', day: 'Terça', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '20/10', day: 'Terça', content: 'Prática — parágrafo usando repertório legitimado', conexao: 'Prática intertextualidade', foco: 'Aplicação prática' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Coesão entre parágrafos — transições e conectivos interparagrafais', conexao: 'Variação linguística II', foco: 'Competência 4' },
-      { date: '23/10', day: 'Sexta', content: 'Clareza e objetividade — cortando pressupostos e informações implícitas desnecessárias', conexao: 'Pressupostos e subentendidos', foco: 'Competência 3' },
-      { date: '27/10', day: 'Terça', content: 'Revisão de texto — identificando e corrigindo ambiguidade e imprecisão', conexao: 'Ambiguidade proposital/humor', foco: 'Estratégias de autorrevisão' },
+      { date: '21/10', day: 'Quarta', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '23/10', day: 'Sexta', content: 'Coesão entre parágrafos — transições e conectivos interparagrafais', conexao: 'Variação linguística II', foco: 'Competência 4' },
+      { date: '27/10', day: 'Terça', content: 'Clareza e objetividade — cortando pressupostos e informações implícitas desnecessárias', conexao: 'Pressupostos e subentendidos', foco: 'Competência 3' },
     ],
   },
   {
     title: 'Semana 11',
     sessions: [
       { date: '28/10', day: 'Quarta', content: '(sem aula — feriado)', conexao: '—', foco: '—', noClass: true },
-      { date: '30/10', day: 'Sexta', content: 'Prática — reescrita e autocorreção de um parágrafo próprio', conexao: 'Prática humor e duplo sentido', foco: 'Aplicação prática' },
-      { date: '03/11', day: 'Terça', content: 'Contra-argumentação — antecipando e refutando o senso comum', conexao: 'Argumentação I', foco: 'Competência 3 — texto mais robusto' },
+      { date: '30/10', day: 'Sexta', content: 'Revisão de texto — identificando e corrigindo ambiguidade e imprecisão', conexao: 'Ambiguidade proposital/humor', foco: 'Estratégias de autorrevisão' },
+      { date: '03/11', day: 'Terça', content: 'Prática — reescrita e autocorreção de um parágrafo próprio', conexao: 'Prática humor e duplo sentido', foco: 'Aplicação prática' },
     ],
   },
   {
     title: 'Semana 12',
     sessions: [
-      { date: '04/11', day: 'Quarta', content: 'Proposta de intervenção I — agente, ação, modo/meio, efeito, detalhamento', conexao: 'Argumentação II', foco: 'Competência 5' },
-      { date: '06/11', day: 'Sexta', content: 'Proposta de intervenção II — erros comuns (vaga, agressiva ou fora do tema)', conexao: 'Texto verbal e não verbal', foco: 'Competência 5' },
-      { date: '10/11', day: 'Terça', content: 'Usando dados, gráficos e tabelas como repertório argumentativo', conexao: 'Leitura de gráficos, tabelas e infográficos', foco: 'Competência 2' },
+      { date: '04/11', day: 'Quarta', content: 'Contra-argumentação — antecipando e refutando o senso comum', conexao: 'Argumentação I', foco: 'Competência 3 — texto mais robusto' },
+      { date: '06/11', day: 'Sexta', content: 'Proposta de intervenção I — agente, ação, modo/meio, efeito, detalhamento', conexao: 'Argumentação II', foco: 'Competência 5' },
+      { date: '10/11', day: 'Terça', content: 'Proposta de intervenção II — erros comuns (vaga, agressiva ou fora do tema)', conexao: 'Texto verbal e não verbal', foco: 'Competência 5' },
     ],
   },
   {
     title: 'Semana 13',
     sessions: [
-      { date: '11/11', day: 'Quarta', content: 'Produção de texto completo I — dissertação com tema inédito (tempo cronometrado)', conexao: 'Multimodalidade', foco: 'Simulação de prova' },
-      { date: '13/11', day: 'Sexta', content: 'Simulado geral — redação nos moldes do Enem/Enceja', conexao: 'Simulado geral', foco: 'Avaliação formativa' },
-      { date: '17/11', day: 'Terça', content: 'Correção comentada das redações — pontos fortes e erros recorrentes', conexao: 'Correção comentada do simulado', foco: 'Retomada dos pontos de maior erro da turma' },
+      { date: '11/11', day: 'Quarta', content: 'Usando dados, gráficos e tabelas como repertório argumentativo', conexao: 'Leitura de gráficos, tabelas e infográficos', foco: 'Competência 2' },
+      { date: '13/11', day: 'Sexta', content: 'Produção de texto completo I — dissertação com tema inédito (tempo cronometrado)', conexao: 'Multimodalidade', foco: 'Simulação de prova' },
+      { date: '17/11', day: 'Terça', content: 'Simulado geral — redação nos moldes do Enem/Enceja', conexao: 'Simulado geral', foco: 'Avaliação formativa' },
+    ],
+  },
+  {
+    title: 'Semana 14',
+    sessions: [
+      { date: '18/11', day: 'Quarta', content: 'Correção comentada das redações — pontos fortes e erros recorrentes', conexao: 'Correção comentada do simulado', foco: 'Retomada dos pontos de maior erro da turma' },
     ],
   },
 ];
 
 const OBSERVACOES_GERAL = [
   '📖 = Interpretação de Texto | ✍️ = Redação — os dois blocos acontecem no mesmo dia, um em seguida do outro.',
+  'Não há aula em 04/09 (formação Selo Escola Antirracista); o conteúdo foi remanejado, e não removido — cada aula seguinte passou para o próximo dia de aula, com um novo encontro acrescentado em 18/11 ao final do cronograma.',
   '16/10 e 28/10 seguem sem aula nas duas disciplinas.',
   'As linhas foram casadas para que o conteúdo de interpretação sirva de gancho para o de redação no mesmo dia (ex.: 15/09 — denotação/conotação na leitura é reaproveitada na escolha de palavras da escrita).',
 ];
 
 const OBSERVACOES_REDACAO = [
+  'Não haverá aula em 04/09 devido à formação para o Selo Escola Antirracista. O conteúdo foi remanejado (não removido), empurrando cada aula seguinte para o próximo dia de aula (ter/qua/sex) e acrescentando um novo encontro em 18/11 ao final do cronograma.',
   'Os dias marcados com "?" no calendário (16/10 e 28/10) foram tratados como sem aula, iguais aos de interpretação de texto.',
   'A coluna "Conexão com interpretação" mostra o assunto visto na aula de interpretação do mesmo dia — útil para fazer a ponte entre as duas disciplinas na aula casada (ex.: em 15/09, "denotação e conotação" é visto na leitura e reaproveitado imediatamente na escolha de palavras da redação).',
   'As competências 1 a 5 citadas são as da matriz de correção da redação do Enem (domínio da norma culta; compreensão do tema; organização de argumentos; mecanismos linguísticos/coesão; proposta de intervenção) — o Enceja avalia critérios semelhantes de forma mais simplificada.',
@@ -368,7 +383,7 @@ export const ClassSchedule: React.FC<ClassScheduleProps> = ({ onGenerateDoc, isG
           <h1 className="text-2xl font-bold text-slate-900">{title}</h1>
           <p className="text-slate-500 text-sm mt-1">
             <strong className="text-slate-700">Turma:</strong> CEJA &nbsp;|&nbsp;
-            <strong className="text-slate-700"> Período:</strong> 21/08 a 17/11 &nbsp;|&nbsp;
+            <strong className="text-slate-700"> Período:</strong> 21/08 a 18/11 &nbsp;|&nbsp;
             <strong className="text-slate-700"> Dias:</strong> Terça, Quarta e Sexta
           </p>
           <p className="text-slate-500 text-sm mt-3 leading-relaxed">{description}</p>
