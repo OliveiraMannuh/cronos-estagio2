@@ -91,7 +91,13 @@ export const PredictionArea: React.FC<PredictionAreaProps> = ({ realCompletedHou
     }
 
     // Set time to midday to avoid timezone edge cases when adding days
-    let current = new Date(startDate + 'T12:00:00');
+    const start = new Date(startDate + 'T12:00:00');
+    const today = new Date();
+    today.setHours(12, 0, 0, 0);
+    // As horas já concluídas correspondem a dias que já aconteceram de verdade,
+    // então os dias restantes devem ser contados a partir de hoje, não recontados
+    // desde a data de início (senão os dias já passados seriam somados de novo).
+    let current = today > start ? today : start;
     let accum = completedHours;
     const result = [];
     const holidaysHit: { date: Date; name: string; isHoliday: boolean }[] = [];
