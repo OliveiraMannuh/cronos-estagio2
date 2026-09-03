@@ -4,14 +4,14 @@
 
 **Documentação sistemática e reflexiva da jornada docente — transformando cada hora de estágio em um registro de evolução pedagógica.**
 
-[![Deploy](https://img.shields.io/badge/deploy-GitHub%20Pages-blue?style=flat-square&logo=github)](https://oliveiramannuh.github.io/cronos_estagio/)
+[![Deploy](https://img.shields.io/badge/deploy-GitHub%20Pages-blue?style=flat-square&logo=github)](https://oliveiramannuh.github.io/cronos-estagio2/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev/)
 [![Firebase](https://img.shields.io/badge/Firebase-12-FFCA28?style=flat-square&logo=firebase)](https://firebase.google.com/)
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[🌐 Acesse o App](https://oliveiramannuh.github.io/cronos_estagio/) · [📋 Reportar Bug](https://github.com/OliveiraMannuh/cronos_estagio/issues) · [💡 Sugerir Feature](https://github.com/OliveiraMannuh/cronos_estagio/issues)
+[🌐 Acesse o App](https://oliveiramannuh.github.io/cronos-estagio2/) · [📋 Reportar Bug](https://github.com/OliveiraMannuh/cronos-estagio2/issues) · [💡 Sugerir Feature](https://github.com/OliveiraMannuh/cronos_estagio/issues)
 
 </div>
 
