@@ -11,7 +11,7 @@
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 
-[🌐 Acesse o App](https://oliveiramannuh.github.io/cronos-estagio2/) · [📋 Reportar Bug](https://github.com/OliveiraMannuh/cronos-estagio2/issues) · [💡 Sugerir Feature](https://github.com/OliveiraMannuh/cronos_estagio/issues)
+[🌐 Acesse o App](https://oliveiramannuh.github.io/cronos-estagio2/) · [📋 Reportar Bug](https://github.com/OliveiraMannuh/cronos-estagio2/issues) · [💡 Sugerir Feature](https://github.com/OliveiraMannuh/cronos-estagio2/issues)
 
 </div>
 
