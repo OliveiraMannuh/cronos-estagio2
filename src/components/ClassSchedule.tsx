@@ -83,55 +83,55 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
     sessions: [
       { date: '30/09', day: 'Quarta', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
       { date: '02/10', day: 'Sexta', content: 'Prática — figuras de linguagem em anúncios, poemas e tirinhas', foco: 'Simulado temático' },
-      { date: '06/10', day: 'Terça', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
+      { date: '06/10', day: 'Terça', content: 'Aula interdisciplinar com Filosofia', foco: '—' },
     ],
   },
   {
     title: 'Semana 8',
     sessions: [
-      { date: '07/10', day: 'Quarta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
-      { date: '09/10', day: 'Sexta', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
-      { date: '13/10', day: 'Terça', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
+      { date: '07/10', day: 'Quarta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
+      { date: '09/10', day: 'Sexta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
+      { date: '13/10', day: 'Terça', content: 'Prática — funções da linguagem em anúncios e tirinhas', foco: 'Simulado temático' },
     ],
   },
   {
     title: 'Semana 9',
     sessions: [
-      { date: '14/10', day: 'Quarta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '14/10', day: 'Quarta', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
       { date: '16/10', day: 'Sexta', content: '(sem aula)', foco: '—', noClass: true },
-      { date: '20/10', day: 'Terça', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
+      { date: '20/10', day: 'Terça', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
-      { date: '23/10', day: 'Sexta', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
-      { date: '27/10', day: 'Terça', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
+      { date: '21/10', day: 'Quarta', content: 'Prática — charges e memes que dialogam com outros textos', foco: 'Leitura crítica de intertextualidade' },
+      { date: '23/10', day: 'Sexta', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '27/10', day: 'Terça', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
     ],
   },
   {
     title: 'Semana 11',
     sessions: [
       { date: '28/10', day: 'Quarta', content: '(sem aula — feriado)', foco: '—', noClass: true },
-      { date: '30/10', day: 'Sexta', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
-      { date: '03/11', day: 'Terça', content: 'Argumentação I — tipos de argumento e estratégias persuasivas', foco: 'Base para a redação e para textos de opinião' },
+      { date: '30/10', day: 'Sexta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
+      { date: '03/11', day: 'Terça', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
     ],
   },
   {
     title: 'Semana 12',
     sessions: [
-      { date: '04/11', day: 'Quarta', content: 'Argumentação II — identificar tese e argumentos em texto dissertativo', foco: 'Leitura de artigos de opinião/editoriais' },
-      { date: '06/11', day: 'Sexta', content: 'Texto verbal e não verbal — leitura de imagens', foco: 'Interpretação de linguagem não verbal, frequente no Enem' },
-      { date: '10/11', day: 'Terça', content: 'Leitura de gráficos, tabelas e infográficos', foco: 'Interpretação de dados estatísticos, comum em questões de Enceja/Enem' },
+      { date: '04/11', day: 'Quarta', content: 'Argumentação I — tipos de argumento e estratégias persuasivas', foco: 'Base para a redação e para textos de opinião' },
+      { date: '06/11', day: 'Sexta', content: 'Argumentação II — identificar tese e argumentos em texto dissertativo', foco: 'Leitura de artigos de opinião/editoriais' },
+      { date: '10/11', day: 'Terça', content: 'Texto verbal e não verbal — leitura de imagens', foco: 'Interpretação de linguagem não verbal, frequente no Enem' },
     ],
   },
   {
     title: 'Semana 13',
     sessions: [
-      { date: '11/11', day: 'Quarta', content: 'Multimodalidade — textos que unem verbal e visual (memes, propagandas, charges)', foco: 'Leitura integrada de múltiplas linguagens' },
-      { date: '13/11', day: 'Sexta', content: 'Simulado geral — bloco de questões estilo Enceja/Enem', foco: 'Avaliação formativa' },
-      { date: '17/11', day: 'Terça', content: 'Correção comentada do simulado', foco: 'Retomada dos pontos de maior erro da turma' },
+      { date: '11/11', day: 'Quarta', content: 'Leitura de gráficos, tabelas e infográficos', foco: 'Interpretação de dados estatísticos, comum em questões de Enceja/Enem' },
+      { date: '13/11', day: 'Sexta', content: 'Multimodalidade — textos que unem verbal e visual (memes, propagandas, charges)', foco: 'Leitura integrada de múltiplas linguagens' },
+      { date: '17/11', day: 'Terça', content: 'Simulado geral — bloco de questões estilo Enceja/Enem', foco: 'Avaliação formativa' },
     ],
   },
   {
@@ -144,6 +144,7 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
 
 const OBSERVACOES_INTERPRETACAO = [
   'Não haverá aula em 04/09 devido à formação para o Selo Escola Antirracista. O conteúdo dessa data foi remanejado (não removido), empurrando cada aula seguinte para o próximo dia de aula (ter/qua/sex) e acrescentando um novo encontro em 18/11 ao final do cronograma para acomodar o conteúdo que sobrou.',
+  'Em 06/10 foi realizada uma aula interdisciplinar com Filosofia. O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, a correção comentada do simulado (antes em 17/11) foi retirada, e o simulado geral passou para 17/11.',
   'Os dias marcados com "?" no calendário original (16/10 e 28/10) continuam sem aula — 28/10 também é feriado (Dia do Servidor Público).',
   'Como o primeiro dia deixou de ser diagnóstico, um novo conteúdo (leitura de gráficos e tabelas) foi incluído no bloco de multimodalidade para preencher o 36º encontro.',
   'A sequência pode ser ajustada conforme o ritmo da turma — os blocos de "prática/simulado" são bons pontos de flexibilidade caso precise reforçar algum tema.',
