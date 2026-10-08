@@ -39,9 +39,23 @@ service cloud.firestore {
              (!data.keys().contains('reportText') || (data.reportText == null || (data.reportText is string && data.reportText.size() <= 10000)));
     }
 
+    // Alterações do cronograma de aulas: só as datas modificadas, como lista por disciplina.
+    function isValidSchedule(data) {
+      return data.keys().hasOnly(['interpretacao', 'redacao', 'addedDays', 'updatedAt']) &&
+             data.interpretacao is list && data.interpretacao.size() <= 150 &&
+             data.redacao is list && data.redacao.size() <= 150 &&
+             (!data.keys().hasAny(['addedDays']) || (data.addedDays is list && data.addedDays.size() <= 50)) &&
+             data.updatedAt == request.time;
+    }
+
     // --- Collections ---
     match /settings/{userId} {
       allow read, write: if isSignedIn() && isOwner(userId);
+    }
+
+    match /schedules/{userId} {
+      allow read, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId) && isValidSchedule(incoming());
     }
 
     match /entries/{entryId} {

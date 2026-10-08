@@ -42,6 +42,10 @@
     "settings/{userId}": {
       "schema": "UserSettings",
       "description": "User specific settings including Google Docs sync status."
+    },
+    "schedules/{userId}": {
+      "schema": "ScheduleOverrides",
+      "description": "Class schedule changes (moved/edited lessons and no-class days) per user."
     }
   },
   "entities": {
@@ -93,6 +97,31 @@
         }
       },
       "required": ["autoSyncEnabled"]
+    },
+    "ScheduleOverrides": {
+      "title": "Schedule Overrides",
+      "description": "Only the schedule dates that differ from the default schedule, per subject.",
+      "type": "object",
+      "properties": {
+        "interpretacao": {
+          "type": "array",
+          "description": "Changed Interpretação de Texto lessons: { date (DD/MM), content, foco, noClass?, extra? }."
+        },
+        "redacao": {
+          "type": "array",
+          "description": "Changed Redação lessons: { date (DD/MM), content, conexao, foco, noClass?, extra? }."
+        },
+        "addedDays": {
+          "type": "array",
+          "description": "Days added by the user beyond the default schedule: { date (DD/MM), day, extra? }."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of the last change."
+        }
+      },
+      "required": ["interpretacao", "redacao", "updatedAt"]
     }
   }
 }
