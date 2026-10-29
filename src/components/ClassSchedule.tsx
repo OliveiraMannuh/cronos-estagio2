@@ -121,45 +121,45 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
     sessions: [
       { date: '14/10', day: 'Quarta', content: 'Sinonímia, antonímia e campo semântico', foco: 'Substituição de termos sem perda de sentido' },
       { date: '16/10', day: 'Sexta', content: 'Figuras de linguagem I — metáfora e metonímia', foco: 'Leitura de sentido figurado em textos literários e publicitários' },
-      { date: '20/10', day: 'Terça', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
+      { date: '20/10', day: 'Terça', content: 'Aula interdisciplinar com Filosofia (Etarismo)', foco: '—' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
-      { date: '23/10', day: 'Sexta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
-      { date: '27/10', day: 'Terça', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
+      { date: '21/10', day: 'Quarta', content: 'Projeto sobre Fake News', foco: '—' },
+      { date: '23/10', day: 'Sexta', content: 'Início laboratório de redação sobre Trabalho e Etarismo', foco: '—' },
+      { date: '27/10', day: 'Terça', content: 'Laboratório de redação sobre Trabalho e Etarismo', foco: '—' },
     ],
   },
   {
     title: 'Semana 11',
     sessions: [
-      { date: '28/10', day: 'Quarta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '28/10', day: 'Quarta', content: 'Laboratório de redação sobre Trabalho e Etarismo', foco: '—' },
       { date: '30/10', day: 'Sexta', content: '(sem aula — feriado)', foco: '—', noClass: true },
-      { date: '03/11', day: 'Terça', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '03/11', day: 'Terça', content: 'Figuras de linguagem II — ironia, hipérbole, eufemismo', foco: 'Efeitos de sentido e intenção do autor' },
     ],
   },
   {
     title: 'Semana 12',
     sessions: [
-      { date: '04/11', day: 'Quarta', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
-      { date: '06/11', day: 'Sexta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
-      { date: '10/11', day: 'Terça', content: 'Ambiguidade proposital x involuntária; humor e duplo sentido', foco: 'Leitura de piadas, tirinhas e trocadilhos' },
+      { date: '04/11', day: 'Quarta', content: 'Funções da linguagem I — referencial, emotiva, conativa', foco: 'Identificar finalidade/intenção do texto' },
+      { date: '06/11', day: 'Sexta', content: 'Funções da linguagem II — fática, metalinguística, poética', foco: 'Reconhecer função predominante' },
+      { date: '10/11', day: 'Terça', content: 'Intertextualidade I — conceito, paródia e paráfrase', foco: 'Diálogo entre textos' },
     ],
   },
   {
     title: 'Semana 13',
     sessions: [
-      { date: '11/11', day: 'Quarta', content: 'Argumentação I — tipos de argumento e estratégias persuasivas', foco: 'Base para a redação e para textos de opinião' },
-      { date: '13/11', day: 'Sexta', content: 'Argumentação II — identificar tese e argumentos em texto dissertativo', foco: 'Leitura de artigos de opinião/editoriais' },
-      { date: '17/11', day: 'Terça', content: 'Texto verbal e não verbal — leitura de imagens', foco: 'Interpretação de linguagem não verbal, frequente no Enem' },
+      { date: '11/11', day: 'Quarta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '13/11', day: 'Sexta', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
+      { date: '17/11', day: 'Terça', content: 'Variação linguística II — norma padrão x preconceito linguístico', foco: 'Tema recorrente em textos de opinião do Enem' },
     ],
   },
   {
     title: 'Semana 14',
     sessions: [
-      { date: '18/11', day: 'Quarta', content: 'Leitura de gráficos, tabelas e infográficos + Multimodalidade — textos que unem verbal e visual (memes, propagandas, charges)', foco: 'Interpretação de dados estatísticos, comum em questões de Enceja/Enem / Leitura integrada de múltiplas linguagens' },
+      { date: '18/11', day: 'Quarta', content: 'Pressupostos e subentendidos', foco: 'O que o texto afirma x o que sugere' },
     ],
   },
 ];
@@ -174,6 +174,7 @@ const OBSERVACOES_INTERPRETACAO = [
   'Em 29/09 a turma participou do projeto "Memórias da resistência". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, os conteúdos das duas últimas aulas (leitura de gráficos, tabelas e infográficos + multimodalidade) foram unidos em 18/11.',
   'Em 21/09 (segunda) houve um dia extra, fora da grade regular, dedicado ao planejamento das aulas de redação e interpretação de texto — destacado em azul claro. Nenhum conteúdo foi remanejado por causa dele.',
   'Não haverá aula em 13/10 (antes o dia sem aula previsto era 16/10). O conteúdo de 13/10 passou para 14/10 e o de 14/10 para 16/10; as demais aulas não mudaram.',
+  'De 20/10 a 28/10 as aulas foram substituídas por atividades especiais: 20/10 — aula interdisciplinar com Filosofia (Etarismo); 21/10 — projeto sobre Fake News; 23/10, 27/10 e 28/10 — laboratório de redação sobre Trabalho e Etarismo. O conteúdo previsto a partir de 20/10 passou para 03/11 em diante; para acomodar a mudança, os cinco últimos conteúdos (ambiguidade/humor, argumentação I e II, texto verbal e não verbal, gráficos + multimodalidade) foram retirados.',
   'O feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10: 28/10 passou a ter aula normal (com o conteúdo antes previsto para 30/10) e 30/10 ficou sem aula.',
   'Como o primeiro dia deixou de ser diagnóstico, um novo conteúdo (leitura de gráficos e tabelas) foi incluído no bloco de multimodalidade para preencher o 36º encontro.',
   'A sequência pode ser ajustada conforme o ritmo da turma — os blocos de "prática/simulado" são bons pontos de flexibilidade caso precise reforçar algum tema.',
@@ -250,45 +251,45 @@ const WEEKS_REDACAO: Week<RedacaoSession>[] = [
     sessions: [
       { date: '14/10', day: 'Quarta', content: 'Prática — parágrafo de desenvolvimento com argumento de exemplificação', conexao: 'Prática figuras de linguagem', foco: 'Aplicação prática' },
       { date: '16/10', day: 'Sexta', content: 'Adequação da linguagem à norma padrão (registro formal)', conexao: 'Funções da linguagem I', foco: 'Competência 1' },
-      { date: '20/10', day: 'Terça', content: 'Tipos de argumento II — causa/consequência e comparação', conexao: 'Funções da linguagem II', foco: 'Competência 3' },
+      { date: '20/10', day: 'Terça', content: 'Aula interdisciplinar com Filosofia (Etarismo)', conexao: '—', foco: '—' },
     ],
   },
   {
     title: 'Semana 10',
     sessions: [
-      { date: '21/10', day: 'Quarta', content: 'Prática — parágrafo de desenvolvimento com causa/consequência', conexao: 'Prática funções da linguagem', foco: 'Aplicação prática' },
-      { date: '23/10', day: 'Sexta', content: 'Repertório sociocultural I — o que é e por que "decorar frases prontas" não funciona', conexao: 'Intertextualidade I', foco: 'Competência 2' },
-      { date: '27/10', day: 'Terça', content: 'Repertório sociocultural II — como inserir citação/dado sem parecer forçado', conexao: 'Intertextualidade II', foco: 'Competência 2' },
+      { date: '21/10', day: 'Quarta', content: 'Projeto sobre Fake News', conexao: '—', foco: '—' },
+      { date: '23/10', day: 'Sexta', content: 'Início laboratório de redação sobre Trabalho e Etarismo', conexao: '—', foco: '—' },
+      { date: '27/10', day: 'Terça', content: 'Laboratório de redação sobre Trabalho e Etarismo', conexao: '—', foco: '—' },
     ],
   },
   {
     title: 'Semana 11',
     sessions: [
-      { date: '28/10', day: 'Quarta', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '28/10', day: 'Quarta', content: 'Laboratório de redação sobre Trabalho e Etarismo', conexao: '—', foco: '—' },
       { date: '30/10', day: 'Sexta', content: '(sem aula — feriado)', conexao: '—', foco: '—', noClass: true },
-      { date: '03/11', day: 'Terça', content: 'Coesão entre parágrafos — transições e conectivos interparagrafais', conexao: 'Variação linguística II', foco: 'Competência 4' },
+      { date: '03/11', day: 'Terça', content: 'Tipos de argumento II — causa/consequência e comparação', conexao: 'Funções da linguagem II', foco: 'Competência 3' },
     ],
   },
   {
     title: 'Semana 12',
     sessions: [
-      { date: '04/11', day: 'Quarta', content: 'Clareza e objetividade — cortando pressupostos e informações implícitas desnecessárias', conexao: 'Pressupostos e subentendidos', foco: 'Competência 3' },
-      { date: '06/11', day: 'Sexta', content: 'Revisão de texto — identificando e corrigindo ambiguidade e imprecisão', conexao: 'Ambiguidade proposital/humor', foco: 'Estratégias de autorrevisão' },
-      { date: '10/11', day: 'Terça', content: 'Prática — reescrita e autocorreção de um parágrafo próprio', conexao: 'Prática humor e duplo sentido', foco: 'Aplicação prática' },
+      { date: '04/11', day: 'Quarta', content: 'Prática — parágrafo de desenvolvimento com causa/consequência', conexao: 'Prática funções da linguagem', foco: 'Aplicação prática' },
+      { date: '06/11', day: 'Sexta', content: 'Repertório sociocultural I — o que é e por que "decorar frases prontas" não funciona', conexao: 'Intertextualidade I', foco: 'Competência 2' },
+      { date: '10/11', day: 'Terça', content: 'Repertório sociocultural II — como inserir citação/dado sem parecer forçado', conexao: 'Intertextualidade II', foco: 'Competência 2' },
     ],
   },
   {
     title: 'Semana 13',
     sessions: [
-      { date: '11/11', day: 'Quarta', content: 'Contra-argumentação — antecipando e refutando o senso comum', conexao: 'Argumentação I', foco: 'Competência 3 — texto mais robusto' },
-      { date: '13/11', day: 'Sexta', content: 'Proposta de intervenção I — agente, ação, modo/meio, efeito, detalhamento', conexao: 'Argumentação II', foco: 'Competência 5' },
-      { date: '17/11', day: 'Terça', content: 'Proposta de intervenção II — erros comuns (vaga, agressiva ou fora do tema)', conexao: 'Texto verbal e não verbal', foco: 'Competência 5' },
+      { date: '11/11', day: 'Quarta', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '13/11', day: 'Sexta', content: 'Coesão entre parágrafos — transições e conectivos interparagrafais', conexao: 'Variação linguística II', foco: 'Competência 4' },
+      { date: '17/11', day: 'Terça', content: 'Clareza e objetividade — cortando pressupostos e informações implícitas desnecessárias', conexao: 'Pressupostos e subentendidos', foco: 'Competência 3' },
     ],
   },
   {
     title: 'Semana 14',
     sessions: [
-      { date: '18/11', day: 'Quarta', content: 'Usando dados, gráficos e tabelas como repertório argumentativo + Produção de texto completo I — dissertação com tema inédito (tempo cronometrado)', conexao: 'Leitura de gráficos, tabelas e infográficos / Multimodalidade', foco: 'Competência 2 / Simulação de prova' },
+      { date: '18/11', day: 'Quarta', content: 'Revisão de texto — identificando e corrigindo ambiguidade e imprecisão', conexao: 'Ambiguidade proposital/humor', foco: 'Estratégias de autorrevisão' },
     ],
   },
 ];
@@ -298,6 +299,7 @@ const OBSERVACOES_GERAL = [
   'Não há aula em 04/09 (formação Selo Escola Antirracista); o conteúdo foi remanejado, e não removido — cada aula seguinte passou para o próximo dia de aula, com um novo encontro acrescentado em 18/11 ao final do cronograma.',
   'Não houve aula em 08/09 (aniversário do Domingues); o conteúdo das duas disciplinas foi remanejado para as aulas seguintes, e os conteúdos previstos para 18/11 foram retirados para dar espaço.',
   'Não houve aula em 11/09 (problemas técnicos: sala sem ar-condicionado e Domingues doente); o conteúdo das duas disciplinas foi remanejado para as aulas seguintes, e os simulados gerais (antes em 18/11) foram retirados para dar espaço.',
+  'De 20/10 a 28/10 as aulas foram substituídas por atividades especiais: 20/10 — aula interdisciplinar com Filosofia (Etarismo); 21/10 — projeto sobre Fake News; 23/10, 27/10 e 28/10 — laboratório de redação sobre Trabalho e Etarismo. O conteúdo previsto a partir de 20/10 passou para 03/11 em diante, e os cinco últimos conteúdos de cada disciplina (antes de 10/11 a 18/11) foram retirados.',
   '13/10 e 30/10 seguem sem aula nas duas disciplinas (o feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10, e o conteúdo de 30/10 foi antecipado para 28/10; o dia sem aula antes previsto para 16/10 passou para 13/10; o conteúdo de 13/10 foi para 14/10 e o de 14/10 para 16/10).',
   'Em 23/09 a turma participou do projeto "Leitura é vida" nas duas disciplinas; o conteúdo foi remanejado para as aulas seguintes.',
   'Em 29/09 a turma participou do projeto "Memórias da resistência" nas duas disciplinas; o conteúdo foi remanejado para as aulas seguintes, e as duas últimas aulas de cada disciplina foram unidas em 18/11.',
@@ -312,6 +314,7 @@ const OBSERVACOES_REDACAO = [
   'Em 23/09 a turma participou do projeto "Leitura é vida". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, a prática de parágrafo usando repertório legitimado (antes em 23/10) foi retirada.',
   'Em 29/09 a turma participou do projeto "Memórias da resistência". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, os conteúdos das duas últimas aulas (dados/gráficos como repertório + produção de texto completo I) foram unidos em 18/11.',
   'Em 21/09 (segunda) houve um dia extra, fora da grade regular, dedicado ao planejamento das aulas de redação e interpretação de texto — destacado em azul claro. Nenhum conteúdo foi remanejado por causa dele.',
+  'De 20/10 a 28/10 as aulas foram substituídas por atividades especiais: 20/10 — aula interdisciplinar com Filosofia (Etarismo); 21/10 — projeto sobre Fake News; 23/10, 27/10 e 28/10 — laboratório de redação sobre Trabalho e Etarismo. O conteúdo previsto a partir de 20/10 passou para 03/11 em diante; para acomodar a mudança, os cinco últimos conteúdos (prática de reescrita, contra-argumentação, proposta de intervenção I e II, dados como repertório + produção de texto completo) foram retirados.',
   'Não haverá aula em 13/10 (antes o dia sem aula previsto era 16/10). O conteúdo de 13/10 passou para 14/10 e o de 14/10 para 16/10. O feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10: o conteúdo de 30/10 foi antecipado para 28/10, igual ao de interpretação de texto.',
   'A coluna "Conexão com interpretação" mostra o assunto visto na aula de interpretação do mesmo dia — útil para fazer a ponte entre as duas disciplinas na aula casada (ex.: em 15/09, "denotação e conotação" é visto na leitura e reaproveitado imediatamente na escolha de palavras da redação).',
   'As competências 1 a 5 citadas são as da matriz de correção da redação do Enem (domínio da norma culta; compreensão do tema; organização de argumentos; mecanismos linguísticos/coesão; proposta de intervenção) — o Enceja avalia critérios semelhantes de forma mais simplificada.',
