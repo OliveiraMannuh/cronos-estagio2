@@ -182,8 +182,8 @@ export default function App() {
 
   // Form State
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
-  const [startTime, setStartTime] = useState('08:00');
-  const [endTime, setEndTime] = useState('12:00');
+  const [startTime, setStartTime] = useState('18:30');
+  const [endTime, setEndTime] = useState('20:30');
   const [reportText, setReportText] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isTranscribing, setIsTranscribing] = useState(false);
@@ -322,8 +322,8 @@ export default function App() {
     setIsFormOpen(false);
     setReportText('');
     setDate(new Date().toISOString().split('T')[0]);
-    setStartTime('08:00');
-    setEndTime('12:00');
+    setStartTime('18:30');
+    setEndTime('20:30');
   };
 
   const removeEntry = async (id: string) => {
