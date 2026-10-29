@@ -34,7 +34,7 @@ export const SCHEDULE_DATES: ScheduleDate[] = [
   { date: '21/10', day: 'Quarta' },
   { date: '23/10', day: 'Sexta' },
   { date: '27/10', day: 'Terça' },
-  { date: '30/10', day: 'Sexta' },
+  { date: '28/10', day: 'Quarta' },
   { date: '03/11', day: 'Terça' },
   { date: '04/11', day: 'Quarta' },
   { date: '06/11', day: 'Sexta' },

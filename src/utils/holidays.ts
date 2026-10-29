@@ -62,7 +62,8 @@ export function getBrazilianHolidays(year: number): Holiday[] {
     { date: `${year}-03-25`, name: 'Abolição da Escravatura no Ceará', scope: 'estadual' },
     // Municipal - Fortaleza
     { date: `${year}-08-15`, name: 'Nossa Senhora da Assunção (Padroeira de Fortaleza)', scope: 'municipal' },
-    { date: `${year}-10-28`, name: 'Dia do Servidor Público', scope: 'municipal' },
+    // Em 2026 o Dia do Servidor Público foi transferido de 28/10 para 30/10
+    { date: `${year}-10-${year === 2026 ? '30' : '28'}`, name: 'Dia do Servidor Público', scope: 'municipal' },
   ];
 }
 

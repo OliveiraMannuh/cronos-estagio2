@@ -135,8 +135,8 @@ const WEEKS_INTERPRETACAO: Week<InterpretacaoSession>[] = [
   {
     title: 'Semana 11',
     sessions: [
-      { date: '28/10', day: 'Quarta', content: '(sem aula — feriado)', foco: '—', noClass: true },
-      { date: '30/10', day: 'Sexta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '28/10', day: 'Quarta', content: 'Intertextualidade II — citação, alusão, epígrafe', foco: 'Reconhecimento de referências implícitas' },
+      { date: '30/10', day: 'Sexta', content: '(sem aula — feriado)', foco: '—', noClass: true },
       { date: '03/11', day: 'Terça', content: 'Variação linguística I — regional, social, histórica, situacional', foco: 'Reconhecer variedades da língua' },
     ],
   },
@@ -174,7 +174,7 @@ const OBSERVACOES_INTERPRETACAO = [
   'Em 29/09 a turma participou do projeto "Memórias da resistência". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, os conteúdos das duas últimas aulas (leitura de gráficos, tabelas e infográficos + multimodalidade) foram unidos em 18/11.',
   'Em 21/09 (segunda) houve um dia extra, fora da grade regular, dedicado ao planejamento das aulas de redação e interpretação de texto — destacado em azul claro. Nenhum conteúdo foi remanejado por causa dele.',
   'Não haverá aula em 13/10 (antes o dia sem aula previsto era 16/10). O conteúdo de 13/10 passou para 14/10 e o de 14/10 para 16/10; as demais aulas não mudaram.',
-  '28/10 continua sem aula — feriado (Dia do Servidor Público).',
+  'O feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10: 28/10 passou a ter aula normal (com o conteúdo antes previsto para 30/10) e 30/10 ficou sem aula.',
   'Como o primeiro dia deixou de ser diagnóstico, um novo conteúdo (leitura de gráficos e tabelas) foi incluído no bloco de multimodalidade para preencher o 36º encontro.',
   'A sequência pode ser ajustada conforme o ritmo da turma — os blocos de "prática/simulado" são bons pontos de flexibilidade caso precise reforçar algum tema.',
   'Sugestão de fontes de texto motivador: notícias atuais, tirinhas (Mafalda, Armandinho), letras de música, propagandas antigas e recentes, e provas anteriores do Enceja/Enem para ambientar a turma ao formato de prova.',
@@ -264,8 +264,8 @@ const WEEKS_REDACAO: Week<RedacaoSession>[] = [
   {
     title: 'Semana 11',
     sessions: [
-      { date: '28/10', day: 'Quarta', content: '(sem aula — feriado)', conexao: '—', foco: '—', noClass: true },
-      { date: '30/10', day: 'Sexta', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '28/10', day: 'Quarta', content: 'Adequação à norma culta — evitando marcas de oralidade na escrita formal', conexao: 'Variação linguística I', foco: 'Competência 1' },
+      { date: '30/10', day: 'Sexta', content: '(sem aula — feriado)', conexao: '—', foco: '—', noClass: true },
       { date: '03/11', day: 'Terça', content: 'Coesão entre parágrafos — transições e conectivos interparagrafais', conexao: 'Variação linguística II', foco: 'Competência 4' },
     ],
   },
@@ -298,7 +298,7 @@ const OBSERVACOES_GERAL = [
   'Não há aula em 04/09 (formação Selo Escola Antirracista); o conteúdo foi remanejado, e não removido — cada aula seguinte passou para o próximo dia de aula, com um novo encontro acrescentado em 18/11 ao final do cronograma.',
   'Não houve aula em 08/09 (aniversário do Domingues); o conteúdo das duas disciplinas foi remanejado para as aulas seguintes, e os conteúdos previstos para 18/11 foram retirados para dar espaço.',
   'Não houve aula em 11/09 (problemas técnicos: sala sem ar-condicionado e Domingues doente); o conteúdo das duas disciplinas foi remanejado para as aulas seguintes, e os simulados gerais (antes em 18/11) foram retirados para dar espaço.',
-  '13/10 e 28/10 seguem sem aula nas duas disciplinas (o dia sem aula antes previsto para 16/10 passou para 13/10; o conteúdo de 13/10 foi para 14/10 e o de 14/10 para 16/10).',
+  '13/10 e 30/10 seguem sem aula nas duas disciplinas (o feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10, e o conteúdo de 30/10 foi antecipado para 28/10; o dia sem aula antes previsto para 16/10 passou para 13/10; o conteúdo de 13/10 foi para 14/10 e o de 14/10 para 16/10).',
   'Em 23/09 a turma participou do projeto "Leitura é vida" nas duas disciplinas; o conteúdo foi remanejado para as aulas seguintes.',
   'Em 29/09 a turma participou do projeto "Memórias da resistência" nas duas disciplinas; o conteúdo foi remanejado para as aulas seguintes, e as duas últimas aulas de cada disciplina foram unidas em 18/11.',
   'Em 21/09 (segunda) houve um dia extra, fora da grade regular, dedicado ao planejamento das aulas de redação e interpretação de texto — destacado em azul claro.',
@@ -312,7 +312,7 @@ const OBSERVACOES_REDACAO = [
   'Em 23/09 a turma participou do projeto "Leitura é vida". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, a prática de parágrafo usando repertório legitimado (antes em 23/10) foi retirada.',
   'Em 29/09 a turma participou do projeto "Memórias da resistência". O conteúdo previsto para essa data foi remanejado, empurrando cada aula seguinte para o próximo dia de aula; para acomodar a mudança, os conteúdos das duas últimas aulas (dados/gráficos como repertório + produção de texto completo I) foram unidos em 18/11.',
   'Em 21/09 (segunda) houve um dia extra, fora da grade regular, dedicado ao planejamento das aulas de redação e interpretação de texto — destacado em azul claro. Nenhum conteúdo foi remanejado por causa dele.',
-  'Não haverá aula em 13/10 (antes o dia sem aula previsto era 16/10). O conteúdo de 13/10 passou para 14/10 e o de 14/10 para 16/10; 28/10 segue sem aula (feriado), igual ao de interpretação de texto.',
+  'Não haverá aula em 13/10 (antes o dia sem aula previsto era 16/10). O conteúdo de 13/10 passou para 14/10 e o de 14/10 para 16/10. O feriado do Dia do Servidor Público foi transferido de 28/10 para 30/10: o conteúdo de 30/10 foi antecipado para 28/10, igual ao de interpretação de texto.',
   'A coluna "Conexão com interpretação" mostra o assunto visto na aula de interpretação do mesmo dia — útil para fazer a ponte entre as duas disciplinas na aula casada (ex.: em 15/09, "denotação e conotação" é visto na leitura e reaproveitado imediatamente na escolha de palavras da redação).',
   'As competências 1 a 5 citadas são as da matriz de correção da redação do Enem (domínio da norma culta; compreensão do tema; organização de argumentos; mecanismos linguísticos/coesão; proposta de intervenção) — o Enceja avalia critérios semelhantes de forma mais simplificada.',
   'Assim como no cronograma de interpretação, os blocos de "prática" são pontos de flexibilidade para reforço, caso a turma precise de mais tempo em algum tópico.',
